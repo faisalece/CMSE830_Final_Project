@@ -96,7 +96,7 @@ with mode:
     lr_model1 = lr_classifier1.fit(X_train_scaled1, y_train1)
     
     # Evaluate the model on the test set
-    test_score1 = lr_model.score(X_test_scaled1, y_test1)
+    test_score1 = lr_model1.score(X_test_scaled1, y_test1)
     
     # Perform cross-validation
     cv_scores1 = cross_val_score(lr_classifier1, X1, y1, cv=5)
