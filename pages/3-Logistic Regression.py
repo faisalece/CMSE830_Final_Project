@@ -53,9 +53,17 @@ def fill_data_KNN(df):
     df_repaired = pd.DataFrame(my_imputer.fit_transform(df), columns=df.columns)
     return df_repaired
 
+def fill_data_mode(df):
+    #Fill up data with mode
+    null_cols = ['Credit_History', 'Self_Employed', 'LoanAmount','Dependents', 'Loan_Amount_Term', 'Gender', 'Married']
+    for col in null_cols:
+        df[col] = df[col].fillna(
+        df[col].dropna().mode().values[0] )  
+    return df
 
 #df_numerical = fill_data_median(df_num)
-df_numerical = fill_data_KNN(df_num)
+#df_numerical = fill_data_KNN(df_num)
+df_numerical = fill_data_mode(df_num)
 
 #st.write(df_numerical.head())
 
