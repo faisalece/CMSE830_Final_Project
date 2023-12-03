@@ -31,7 +31,7 @@ def to_numeric(df):
 #df = to_numeric(df)
 
 #tabs
-gender, married, dependents,education,self_employed, applicant_income, coapplicant_income", loan_amount, loan_amount_term, credit_history, property_area = st.tabs(["Gender", "Married", "Dependents","Education","Self Employed", "Applicant Income", "Co-applicant Income", "Loan Amount", "Loan Amount Term", "Credit History", "Property Area"])
+gender,married,dependents,education,self_employed,applicant_income,coapplicant_income,loan_amount,loan_amount_term,credit_history,property_area = st.tabs(["Gender", "Married", "Dependents","Education","Self Employed", "Applicant Income", "Co-applicant Income", "Loan Amount", "Loan Amount Term", "Credit History", "Property Area"])
 
 with gender:
     # Gender
