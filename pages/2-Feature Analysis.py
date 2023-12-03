@@ -73,6 +73,14 @@ with education:
     st.write("Observation: Most people are graduates, and most of them have obtained a loan.")
     st.write("However, people who didn't graduate also got a loan, but with a lower percentage compared to those who graduated.")
     st.write("##### Decision: Not an important feature")
+
+with self_employed:
+    # self_employed
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='Self_Employed', hue='Loan_Status', data=df);
+    Self_Employed_fig = plt.gcf()  # Get the current figure
+    st.pyplot(Self_Employed_fig)
+    st.write("##### Decision: No pattern (same as Education)")
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
