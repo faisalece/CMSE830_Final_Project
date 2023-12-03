@@ -85,7 +85,7 @@ with self_employed:
 with applicant_income:
     # ApplicantIncome
     plt.figure(figsize=(15,5))
-    sns.countplot(x='ApplicantIncome', hue='Loan_Status', data=df);
+    sns.scatter(df_new['ApplicantIncome'], df_new['Loan_Status']);
     ApplicantIncome_fig = plt.gcf()  # Get the current figure
     st.pyplot(ApplicantIncome_fig)
     st.write("##### No clear pattern observed.")
