@@ -91,6 +91,7 @@ with applicant_income:
     plt.ylabel("Loan_Status")
     applicant_income_fig = plt.gcf()
     st.pyplot(applicant_income_fig)
+    st.write("##### Decision: No clear pattern observed.")
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
