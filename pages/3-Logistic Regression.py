@@ -72,11 +72,8 @@ X_test_scaled = scaler.transform(X_test)
 
 
 
-st.write("Infinite Values in X_train_scaled:")
-st.write(np.isinf(X_train_scaled).sum())
-
-st.write("Infinite Values in X_test_scaled:")
-st.write(np.isinf(X_test_scaled).sum())
+st.write(X_train_scaled.describe())
+st.write(X_test_scaled.describe())
 
 # Create and train the Logistic Regression classifier
 lr_classifier = LogisticRegression()
