@@ -1,100 +1,127 @@
-
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
+import matplotlib.pyplot as plt
 import seaborn as sns
+import plotly.express as px
 
-st.image("G.webp", use_column_width="always")
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.svm import SVC
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
+from sklearn.impute import KNNImputer
+from sklearn.metrics import classification_report, accuracy_score
 
-ra=pd.read_csv('fifa.csv')
-rs=pd.read_csv('results.csv')
-gs=pd.read_csv('goalscorers.csv')
-conlist=sorted(list(rs['home_team'].unique()))
+# Load the dataset
+def load_data():
+    data = pd.read_csv('train.csv')
+    return data
+
+data = load_data()
+
+# Do not use inplace=True here
+df = data.drop('Loan_ID', axis=1)
+
+def to_numeric(df):
+    to_numeric = {'Male': 1, 'Female': 2,
+    'Yes': 1, 'No': 2,
+    'Graduate': 1, 'Not Graduate': 2,
+    'Urban': 3, 'Semiurban': 2, 'Rural': 1,
+    'Y': 1, 'N': 0,
+    '3+': 3}
+
+    # No need for inplace=True here
+    data = df.applymap(lambda label: to_numeric.get(label) if label in to_numeric else label)
+
+    return data
+df_num = to_numeric(df)
 
 
+def fill_data_median(df):
+    #Fill up data with median
+    df['Credit_History'].fillna(value=df['Credit_History'].median(),inplace=True)
+    df['Self_Employed'].fillna(value=df['Self_Employed'].median(),inplace=True)
+    df['LoanAmount'].fillna(value=df['LoanAmount'].median(),inplace=True)
+    df['Dependents'].fillna(value=df['Dependents'].median(),inplace=True)
+    df['Loan_Amount_Term'].fillna(value=df['Loan_Amount_Term'].median(),inplace=True)
+    df['Gender'].fillna(value=df['Gender'].median(),inplace=True)
+    df['Married'].fillna(value=df['Married'].median(),inplace=True)
+    return df
+        
+def fill_data_KNN(df):
+    #Fill up data with KNN
+    my_imputer = KNNImputer(n_neighbors=5, weights='distance', metric='nan_euclidean')
+    df_repaired = pd.DataFrame(my_imputer.fit_transform(df), columns=df.columns)
+    return df_repaired
+
+def fill_data_mode(df):
+    #Fill up data with mode
+    null_cols = ['Credit_History', 'Self_Employed', 'LoanAmount','Dependents', 'Loan_Amount_Term', 'Gender', 'Married']
+    for col in null_cols:
+        df[col] = df[col].fillna(
+        df[col].dropna().mode().values[0] )  
+    return df
 
 
+#st.write(df_numerical.head())
 
-
-
-
-
-
-
-
-
-
-
-st.title('Scored Goals Distribution in a Football Game')
-
-
-st.write("This section provides an insight into the distribution of scored goals in more than 20,000 football matches, minute by minute. As we explore this data through scatter and histogram plots, we discover interesting patterns that shed light on the dynamics of scoring throughout a game.")
-
-
-
-# Sample DataFrame with scored goals and minutes
-gs=gs[~(gs['minute'] > 90)]
-df = gs.groupby('minute').size().reset_index(name='Goals')
-
-
-# Set Seaborn style
-sns.set(style="whitegrid")
-
-# Title for the app
-
-# Widgets in the main column
-plot_type = st.radio("Select plot type", ("Scatter Plot", "Histogram"))
-
+    
+# Streamlit app display
+st.title("Loan Status Prediction Using Logistic Regression")
     
 
 
+st.write("Fill Data with Mode")
+df_num_mode = fill_data_mode(df_num)
+# Split the data into features (X) and target variable (y)
+y = df_num_mode['Loan_Status']
+X = df_num_mode.drop('Loan_Status', axis=1)
+
+# Split the data into training and testing sets
+start_state = 42
+test_fraction = 0.2
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
+#st.write(X_train, X_test, y_train, y_test)
+
+# Standardize the features using StandardScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
+
+# Create and train the SVM classifier
+svm_classifier = SVC(kernel='linear', C=5)
+svm_model = svm_classifier.fit(X_train_scaled, y_train)
+
+# Evaluate the model on the test set
+test_score = svm_model.score(X_test_scaled, y_test)
+
+# Perform cross-validation
+cv_scores = cross_val_score(svm_classifier, X, y, cv=5)
+
+# Make predictions on the test set
+y_pred = svm_model.predict(X_test_scaled)
+
+# Generate and display the confusion matrix
+conf_mat = confusion_matrix(y_test, y_pred)
+
+# Display test set score
+st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
+
+# Display cross-validation scores
+mean_cv_score_median = np.mean(cv_scores)
+st.write(f"The mean cross-validation score is: {mean_cv_score_median}")
+
+# Display the confusion matrix
+st.write("Confusion Matrix:")
+#ConfusionMatrixDisplay.from_estimator(lr_classifier, X_test_scaled, y_test)
+conf_mat = confusion_matrix(y_test, y_pred)
+ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
+confusion_mean_fill_fig = plt.gcf()  # Get the current figure
+st.pyplot(confusion_mean_fill_fig)
+
+# Prediction Summary by Species
+st.write("Prediction Summary by Species:")
+classification_report_str = classification_report(y_test, y_pred)
+st.text(classification_report_str)
 
 
-exclude_half = st.radio("Exclude minutes [1, 45, 46, 90]", ("No", "Yes"))
-
-
-
-if exclude_half == "Yes":
-    df = df[~(df['minute'] == 45) & ~(df['minute'] == 90) & ~(df['minute'] == 46) & ~(df['minute'] == 1)]
-    gs = gs[~(gs['minute'] == 45) & ~(gs['minute'] == 90) & ~(gs['minute'] == 46) & ~(gs['minute'] == 1)]
-
-
-# Create the plot
-plt.figure(figsize=(8, 6))
-
-highlighted_minutes = [1,45,46,90]
-
-bin_num = st.slider("Select Number of bins", 1, 10, 6)
-
-
-if plot_type == "Scatter Plot":
-    sns.scatterplot(x='minute', y='Goals', data=df, color='C2')
-    plt.xlabel("Minute of Game")
-    plt.ylabel("Number of Scored Goals")
-
-    for minute in highlighted_minutes:
-        subset = df[df['minute'] == minute]
-        sns.scatterplot(x=subset['minute'], y=subset['Goals'], color='r')
-
-else:
-    sns.histplot(data=gs ,x='minute', bins=bin_num, color='skyblue',stat="percent")
-    plt.xlabel("Minute of Game")
-    plt.ylabel("Percent of Scored Goals (%)")
-
-
-x_ticks = [0, 15, 30, 45, 60, 75, 90]
-plt.xticks(x_ticks)
-
-
-# Display the plot
-st.pyplot(plt)
-
-st.write("* The scatter plots allow us to observe the number of goals scored in each minute of a football match. However, there are some **outlier** points to consider. (:question:) By excluding these outlier minutes, we can observe a clearer trend: the number of scored goals tends to **increase** with match time. As we progress toward the **end of the game**, the probability of scoring a goal also **rises**.")
-
-st.write("* The histogram plots further illuminate these trends. They divide match time into equal **segments** and allow us to compare the percentage of scored goals in each part. These plots reveal how the **distribution** of goals changes throughout the game, highlighting when goals are most likely to be scored.")
-
-
-st.markdown(''' :question:
-    :blue[These outliers are due to a unique feature of the dataset: for extra minutes in each half, the last minute is recorded. For instance, a match might reach 45'+1', which is effectively 45'. This accounting method results in 45' and 90' having significantly higher goal numbers than the average. Additionally, during the first minute of each half (1' , 46'), the number of scored goals tends to be relatively lower than the average. This phenomenon can be attributed to the initial moments of a match when teams are often more cautious and focused on setting up their gameplay.] 
-    ''')
