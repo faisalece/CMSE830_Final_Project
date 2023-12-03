@@ -42,7 +42,7 @@ with gender:
     import streamlit as st
     st.write("Most males have obtained a loan, and most females have obtained one too, indicating no clear pattern.")
     st.write("I think it's not a very important feature; we will reassess its significance later.")
-    st.write("Decision: To be reevaluated")
+    st.write("##### Decision: To be reevaluated")
 
 with married:
     # married
