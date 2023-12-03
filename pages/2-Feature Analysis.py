@@ -44,7 +44,7 @@ with gender:
     # Displaying the information using st.write()
     st.write("Most people who get married have obtained a loan.")
     st.write("If you're married, then you may have a better chance of getting a loan.")
-    st.write("Decision: Good feature")
+    st.write("##### Decision: Good feature")
 
 plot_options = ["Correlation Heat Map", "Joint Plot of Columns","Histogram of Column", "Pair Plot", "PairGrid Plot", "Box Plot of Column", "3D Scatter Plot"]
 selected_plot = st.sidebar.selectbox("Choose a plot type", plot_options)
