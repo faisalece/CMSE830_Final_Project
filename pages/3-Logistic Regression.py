@@ -40,8 +40,10 @@ def fill_data_median(df):
     df['Credit_History'].fillna(value=df['Credit_History'].median(),inplace=True)
     df['Self_Employed'].fillna(value=df['Self_Employed'].median(),inplace=True)
     df['LoanAmount'].fillna(value=df['LoanAmount'].median(),inplace=True)
+    df['Dependents'].fillna(value=df['Dependents'].median(),inplace=True)
     df['Loan_Amount_Term'].fillna(value=df['Loan_Amount_Term'].median(),inplace=True)
     df['Gender'].fillna(value=df['Gender'].median(),inplace=True)
+    df['Married'].fillna(value=df['Married'].median(),inplace=True)
     return df
         
 def fill_data_KNN(df):
@@ -69,8 +71,6 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fractio
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
-
-
 
 st.write(X_train_scaled)
 st.write(X_test_scaled)
