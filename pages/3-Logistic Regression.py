@@ -94,10 +94,11 @@ conf_mat = confusion_matrix(y_test, y_pred)
 st.title("Loan Status Prediction Using Logistic Regression")
 
 # Display test set score
-st.write(f"The score of the model on the test set is {test_score}")
+st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
 
 # Display cross-validation scores
-st.write(f"The cross-validation scores are: {cv_scores}")
+mean_cv_score = np.mean(cv_scores)
+print(f"The mean cross-validation score is: {mean_cv_score}")
 
 # Display the confusion matrix
 st.write("Confusion Matrix:")
