@@ -82,7 +82,7 @@ with mode:
     
     # Split the data into training and testing sets
     start_state = 42
-    test_fraction = 0.2
+    test_fraction = 0.4
     X_train1, X_test1, y_train1, y_test1 = train_test_split(X1, y1, test_size=test_fraction, random_state=start_state)
     #st.write(X_train1, X_test1, y_train1, y_test1)
     
@@ -134,7 +134,7 @@ with median:
     
     # Split the data into training and testing sets
     start_state = 42
-    test_fraction = 0.2
+    test_fraction = 0.4
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
     #st.write(X_train, X_test, y_train, y_test)
     
@@ -188,7 +188,7 @@ with KNN:
     
     # Split the data into training and testing sets
     start_state = 42
-    test_fraction = 0.2
+    test_fraction = 0.4
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
     #st.write(X_train, X_test, y_train, y_test)
     
