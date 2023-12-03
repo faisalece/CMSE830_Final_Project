@@ -85,7 +85,7 @@ with self_employed:
 with applicant_income:
     # ApplicantIncome
     plt.figure(figsize=(15, 5))
-    sns.scatterplot(x='ApplicantIncome', y='Loan_Status', data=df_new)
+    sns.scatterplot(x='ApplicantIncome', y='Loan_Status', data=df)
     plt.title("ApplicantIncome vs Loan_Status")
     plt.xlabel("ApplicantIncome")
     plt.ylabel("Loan_Status")
