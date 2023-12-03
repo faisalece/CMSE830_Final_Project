@@ -33,20 +33,20 @@ df = to_numeric(df)
 st.write(df.describe())
 
 #tabs
-intro_tab, goal_tab, describe_tab, significance_tab, con_tab = st.tabs(["Introduction", "Project Goal", "Describe the Dataset","Project Significance","Conclusion"])
+Gender, goal_tab, describe_tab, significance_tab, con_tab = st.tabs(["Gender", "Project Goal", "Describe the Dataset","Project Significance","Conclusion"])
 
 with intro_tab:
     col3, col4 = st.columns([3, 2])
     with col3:
-        st.write("When individuals apply for a loan from a bank, several key parameters are considered to assess their creditworthiness and determine the eligibility for the loan. Banks evaluate the applicant's financial stability, credit history, income, and debt levels. Additionally, factors such as employment history, loan purpose, and the applicant's relationship with the bank may also play a crucial role in the decision-making process. The overall goal is to gauge the borrower's ability to repay the loan in a timely manner. These parameters collectively help banks assess the risk associated with lending to a particular individual, ensuring responsible lending practices.")
-        st.write("Here are someparameters that banks commonly consider when evaluating loan applications:")
-        st.write("1. Credit Score")
-        st.write("2. Income")
-        st.write("3. Debt-to-Income Ratio")
-        st.write("4. Employment History")
-        st.write("5. Loan Purpose")
-        st.write("6. Family Size")
-        st.write("Etc.")
+        # Credit_History
+        plt.figure(figsize=(15,5))
+        sns.countplot(x='Gender', hue='Loan_Status', data=df);
+        
+        # we didn't give a loan for most people who got Credit History = 0
+        # but we did give a loan for most of people who got Credit History = 1
+        # so we can say if you got Credit History = 1 , you will have better chance to get a loan
+        
+        # important feature
     with col4:
         st.image("loan_give.jpeg", caption="Here is your loan amount.", use_column_width=True)
 
