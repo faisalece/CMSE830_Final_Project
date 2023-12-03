@@ -53,7 +53,7 @@ def fill_data_KNN(df):
 
 df_numerical = fill_data_median(df_num)
 
-st.write(df_numerical.head())
+#st.write(df_numerical.head())
 
 # Split the data into features (X) and target variable (y)
 y = df_numerical['Loan_Status']
@@ -63,6 +63,7 @@ X = df_numerical.drop('Loan_Status', axis=1)
 start_state = 42
 test_fraction = 0.2
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
+st.write(X_train, X_test, y_train, y_test)
 
 # Standardize the features using StandardScaler
 scaler = StandardScaler()
