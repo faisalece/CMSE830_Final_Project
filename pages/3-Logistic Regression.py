@@ -70,12 +70,13 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-st.write("Missing Values in X_train_scaled:")
-st.write(X_train_scaled.isnull().sum())
 
-st.write("Missing Values in X_test_scaled:")
-st.write(X_test_scaled.isnull().sum())
 
+st.write("Infinite Values in X_train_scaled:")
+st.write(np.isinf(X_train_scaled).sum())
+
+st.write("Infinite Values in X_test_scaled:")
+st.write(np.isinf(X_test_scaled).sum())
 
 # Create and train the Logistic Regression classifier
 lr_classifier = LogisticRegression()
