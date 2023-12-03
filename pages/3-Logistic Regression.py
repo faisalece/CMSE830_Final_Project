@@ -105,7 +105,7 @@ with mode:
     y_pred1 = lr_model1.predict(X_test_scaled1)
 
     # Display test set score
-    st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
+    st.write(f"The accuracy of the model on the test set is {test_score1:.2%}")
     
     # Display cross-validation scores
     mean_cv_score1 = np.mean(cv_scores1)
