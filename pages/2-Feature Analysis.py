@@ -92,6 +92,17 @@ with applicant_income:
     applicant_income_fig = plt.gcf()
     st.pyplot(applicant_income_fig)
     st.write("##### Decision: No clear pattern observed.")
+
+with coapplicant_income:
+    #coapplicant_income
+    plt.figure(figsize=(15, 5))
+    sns.scatterplot(x='CoapplicantIncome', y='Loan_Status', data=df)
+    plt.title("CoapplicantIncome vs Loan_Status")
+    plt.xlabel("CoapplicantIncome")
+    plt.ylabel("Loan_Status")
+    applicant_income_fig = plt.gcf()
+    st.pyplot(applicant_income_fig)
+    st.write("##### Decision: No clear pattern observed.")
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
