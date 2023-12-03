@@ -50,7 +50,7 @@ def fill_data_median(df):
 def fill_data_KNN(df):
     #Fill up data with KNN
     my_imputer = KNNImputer(n_neighbors=5, weights='distance', metric='nan_euclidean')
-    df_repaired = pd.DataFrame(my_imputer.fit_transform(df_old), columns=df_old.columns)
+    df_repaired = pd.DataFrame(my_imputer.fit_transform(df), columns=df.columns)
     return df_repaired
 
 
