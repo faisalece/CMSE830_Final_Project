@@ -41,7 +41,10 @@ with gender:
     sns.countplot(x='Gender', hue='Loan_Status', data=df);
     gender_fig = plt.gcf()  # Get the current figure
     st.pyplot(gender_fig)
-    st.write("# we didn't give a loan for most people who got Credit History = 0# but we did give a loan for most of people who got Credit History = 1# so we can say if you got Credit History = 1 , you will have better chance to get a loan# important feature")
+    st.write("we didn't give a loan for most people who got Credit History = 0")
+    st.write("but we did give a loan for most of people who got Credit History = 1")
+    st.write("so we can say if you got Credit History = 1 , you will have better chance to get a loan")
+    st.write("### Decision : important feature")
 
 
 
