@@ -1,0 +1,6 @@
+streamlit
+seaborn
+statsmodels
+hiplot
+scikit-learn
+plotly
