@@ -48,7 +48,7 @@ with intro_tab:
         
         # important feature
     with col4:
-        st.image("loan_give.jpeg", caption="Here is your loan amount.", use_column_width=True)
+        st.write("# we didn't give a loan for most people who got Credit History = 0# but we did give a loan for most of people who got Credit History = 1# so we can say if you got Credit History = 1 , you will have better chance to get a loan# important feature")
 
 
 
