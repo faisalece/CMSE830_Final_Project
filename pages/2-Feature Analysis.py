@@ -39,7 +39,17 @@ with gender:
     sns.countplot(x='Gender', hue='Loan_Status', data=df);
     gender_fig = plt.gcf()  # Get the current figure
     st.pyplot(gender_fig)
-    # Displaying the information using st.write()
+    import streamlit as st
+    st.write("Most males have obtained a loan, and most females have obtained one too, indicating no clear pattern.")
+    st.write("I think it's not a very important feature; we will reassess its significance later.")
+    st.write("Decision: To be reevaluated")
+
+with married:
+    # married
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='Married', hue='Loan_Status', data=df);
+    married_fig = plt.gcf()  # Get the current figure
+    st.pyplot(married_fig)
     st.write("Most people who get married have obtained a loan.")
     st.write("If you're married, then you may have a better chance of getting a loan.")
     st.write("##### Decision: Good feature")
