@@ -101,6 +101,6 @@ st.write(f"The cross-validation scores are: {cv_scores}")
 st.write("Confusion Matrix:")
 #ConfusionMatrixDisplay.from_estimator(lr_classifier, X_test_scaled, y_test)
 conf_mat = confusion_matrix(y_test, y_pred)
-ConfusionMatrixDisplay(conf_mat, display_labels=['Approved', 'Not Approved']).plot()
+ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
 confusion_mean_fill_fig = plt.gcf()  # Get the current figure
 st.pyplot(confusion_mean_fill_fig)
