@@ -143,10 +143,8 @@ with property_area:
     sns.countplot(x='Property_Area', hue='Loan_Status', data=df);
     property_area_fig = plt.gcf()  # Get the current figure
     st.pyplot(property_area_fig)
-    st.write("We didn't approve loans for most people with Credit History = 0.")
-    st.write("However, we approved loans for most people with Credit History = 1.")
-    st.write("Conclusion: If you have Credit History = 1, you will have a better chance of getting a loan.")
-    st.write("##### Decision: Important feature")
+    st.write("Residents of Semi-Urban areas are more likely to secure loans compared to those in urban or rural areas.")
+    st.write("Decision: Important feature")
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
