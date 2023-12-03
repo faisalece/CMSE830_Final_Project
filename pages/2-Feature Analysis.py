@@ -41,10 +41,10 @@ with gender:
     sns.countplot(x='Gender', hue='Loan_Status', data=df);
     gender_fig = plt.gcf()  # Get the current figure
     st.pyplot(gender_fig)
-    st.write("we didn't give a loan for most people who got Credit History = 0")
-    st.write("but we did give a loan for most of people who got Credit History = 1")
-    st.write("so we can say if you got Credit History = 1 , you will have better chance to get a loan")
-    st.write("### Decision : important feature")
+    # Displaying the information using st.write()
+    st.write("Most people who get married have obtained a loan.")
+    st.write("If you're married, then you may have a better chance of getting a loan.")
+    st.write("Decision: Good feature")
 
 plot_options = ["Correlation Heat Map", "Joint Plot of Columns","Histogram of Column", "Pair Plot", "PairGrid Plot", "Box Plot of Column", "3D Scatter Plot"]
 selected_plot = st.sidebar.selectbox("Choose a plot type", plot_options)
