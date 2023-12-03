@@ -36,21 +36,12 @@ st.write(df.describe())
 gender, goal_tab, describe_tab, significance_tab, con_tab = st.tabs(["Gender", "Project Goal", "Describe the Dataset","Project Significance","Conclusion"])
 
 with gender:
-    col1, col2 = st.columns([3, 2])
-    with col1:
-        # Credit_History
-        plt.figure(figsize=(15,5))
-        sns.countplot(x='Gender', hue='Loan_Status', data=df);
-        gender_fig = plt.gcf()  # Get the current figure
-        st.pyplot(gender_fig)
-        
-        # we didn't give a loan for most people who got Credit History = 0
-        # but we did give a loan for most of people who got Credit History = 1
-        # so we can say if you got Credit History = 1 , you will have better chance to get a loan
-        
-        # important feature
-    with col2:
-        st.write("# we didn't give a loan for most people who got Credit History = 0# but we did give a loan for most of people who got Credit History = 1# so we can say if you got Credit History = 1 , you will have better chance to get a loan# important feature")
+    # Gender
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='Gender', hue='Loan_Status', data=df);
+    gender_fig = plt.gcf()  # Get the current figure
+    st.pyplot(gender_fig)
+    st.write("# we didn't give a loan for most people who got Credit History = 0# but we did give a loan for most of people who got Credit History = 1# so we can say if you got Credit History = 1 , you will have better chance to get a loan# important feature")
 
 
 
