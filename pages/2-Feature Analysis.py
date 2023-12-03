@@ -28,7 +28,7 @@ def to_numeric(df):
 
     return data
 
-df = to_numeric(df)
+#df = to_numeric(df)
 
 st.write(df.describe())
 
@@ -45,8 +45,6 @@ with gender:
     st.write("but we did give a loan for most of people who got Credit History = 1")
     st.write("so we can say if you got Credit History = 1 , you will have better chance to get a loan")
     st.write("### Decision : important feature")
-
-
 
 plot_options = ["Correlation Heat Map", "Joint Plot of Columns","Histogram of Column", "Pair Plot", "PairGrid Plot", "Box Plot of Column", "3D Scatter Plot"]
 selected_plot = st.sidebar.selectbox("Choose a plot type", plot_options)
