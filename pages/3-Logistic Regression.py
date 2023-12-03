@@ -10,6 +10,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
 from sklearn.impute import KNNImputer
+from sklearn.metrics import classification_report, accuracy_score
 
 # Load the dataset
 def load_data():
@@ -115,3 +116,12 @@ conf_mat = confusion_matrix(y_test, y_pred)
 ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
 confusion_mean_fill_fig = plt.gcf()  # Get the current figure
 st.pyplot(confusion_mean_fill_fig)
+
+# Prediction Summary by Species
+st.write("Prediction Summary by Species:")
+classification_report_str = classification_report(y_test, y_predict)
+st.text(classification_report_str)
+
+# Accuracy Score
+DT_SC = accuracy_score(y_predict, y_test)
+st.write(f"Accuracy Score: {round(DT_SC*100, 2)}%")
