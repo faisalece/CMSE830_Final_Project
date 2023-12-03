@@ -30,8 +30,6 @@ def to_numeric(df):
 
 #df = to_numeric(df)
 
-st.write(df.describe())
-
 #tabs
 gender, goal_tab, describe_tab, significance_tab, con_tab = st.tabs(["Gender", "Project Goal", "Describe the Dataset","Project Significance","Conclusion"])
 
