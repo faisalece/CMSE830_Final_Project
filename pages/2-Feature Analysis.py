@@ -84,11 +84,12 @@ with self_employed:
 
 with applicant_income:
     # ApplicantIncome
-    plt.figure(figsize=(15,5))
-    sns.scatter(df_new['ApplicantIncome'], df_new['Loan_Status']);
-    ApplicantIncome_fig = plt.gcf()  # Get the current figure
-    st.pyplot(ApplicantIncome_fig)
-    st.write("##### No clear pattern observed.")
+    plt.figure(figsize=(15, 5))
+    sns.scatterplot(x='ApplicantIncome', y='Loan_Status', data=df_new)
+    plt.title("ApplicantIncome vs Loan_Status")
+    plt.xlabel("ApplicantIncome")
+    plt.ylabel("Loan_Status")
+    st.pyplot(plt.gcf())
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
