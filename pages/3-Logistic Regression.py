@@ -72,8 +72,8 @@ X_test_scaled = scaler.transform(X_test)
 
 
 
-st.write(X_train_scaled.describe())
-st.write(X_test_scaled.describe())
+st.write(X_train_scaled)
+st.write(X_test_scaled)
 
 # Create and train the Logistic Regression classifier
 lr_classifier = LogisticRegression()
