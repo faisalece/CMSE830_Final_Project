@@ -99,7 +99,7 @@ with mode:
     test_score1 = lr_model1.score(X_test_scaled1, y_test1)
     
     # Perform cross-validation
-    cv_scores1 = cross_val_score(lr_classifier1, X1, y1, cv=2)
+    cv_scores1 = cross_val_score(lr_classifier1, X1, y1, cv=5)
     
     # Make predictions on the test set
     y_pred1 = lr_model1.predict(X_test_scaled1)
