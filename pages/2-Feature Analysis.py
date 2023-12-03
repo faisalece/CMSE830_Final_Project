@@ -38,7 +38,7 @@ with gender:
     plt.figure(figsize=(15,5))
     sns.countplot(x='Gender', hue='Loan_Status', data=df);
     gender_fig = plt.gcf()  # Get the current figure
-    st.pyplot(gender_fig)
+    st.pyplot(gender_fig) 
     import streamlit as st
     st.write("Most males have obtained a loan, and most females have obtained one too, indicating no clear pattern.")
     st.write("I think it's not a very important feature; we will reassess its significance later.")
@@ -53,6 +53,16 @@ with married:
     st.write("Most people who get married have obtained a loan.")
     st.write("If you're married, then you may have a better chance of getting a loan.")
     st.write("##### Decision: Good feature")
+    
+with dependents:
+    # married
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='Dependents', hue='Loan_Status', data=df);
+    dependents_fig = plt.gcf()  # Get the current figure
+    st.pyplot(dependents_fig)
+    st.write("If Dependents = 0, there is a higher chance of getting a loan (very high chance).")
+    st.write("##### Decision: Good feature")
+
 
 plot_options = ["Correlation Heat Map", "Joint Plot of Columns","Histogram of Column", "Pair Plot", "PairGrid Plot", "Box Plot of Column", "3D Scatter Plot"]
 selected_plot = st.sidebar.selectbox("Choose a plot type", plot_options)
