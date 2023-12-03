@@ -122,7 +122,7 @@ with loan_amount_term:
     plt.title("Loan Amount Term vs Loan_Status")
     plt.xlabel("Loan Amount Term")
     plt.ylabel("Loan_Status")
-   loan_amount_term_fig = plt.gcf()
+    loan_amount_term_fig = plt.gcf()
     st.pyplot(loan_amount_term_fig)
     st.write("##### Decision: No clear pattern observed.")
 df_new = to_numeric(df)
