@@ -89,7 +89,8 @@ with applicant_income:
     plt.title("ApplicantIncome vs Loan_Status")
     plt.xlabel("ApplicantIncome")
     plt.ylabel("Loan_Status")
-    st.pyplot(plt.gcf())
+    applicant_income_fig = plt.gcf()
+    st.pyplot(applicant_income_fig)
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
