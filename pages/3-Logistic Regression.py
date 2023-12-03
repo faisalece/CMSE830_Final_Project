@@ -193,3 +193,4 @@ with median:
     # Accuracy Score
     DT_SC = accuracy_score(y_pred, y_test)
     st.write(f"Accuracy Score: {round(DT_SC*100, 2)}%")
+    st.write("Fill Data with Median")
