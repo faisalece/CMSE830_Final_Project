@@ -55,7 +55,7 @@ with married:
     st.write("##### Decision: Good feature")
     
 with dependents:
-    # married
+    #dependents
     plt.figure(figsize=(15,5))
     sns.countplot(x='Dependents', hue='Loan_Status', data=df);
     dependents_fig = plt.gcf()  # Get the current figure
@@ -63,7 +63,17 @@ with dependents:
     st.write("If Dependents = 0, there is a higher chance of getting a loan (very high chance).")
     st.write("##### Decision: Good feature")
 
-
+with education:
+    # education
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='Education', hue='Loan_Status', data=df);
+    education_fig = plt.gcf()  # Get the current figure
+    st.pyplot(education_fig)
+    st.write("Whether you are graduated or not, you will have almost the same chance of getting a loan (No clear pattern).")
+    st.write("Observation: Most people are graduates, and most of them have obtained a loan.")
+    st.write("However, people who didn't graduate also got a loan, but with a lower percentage compared to those who graduated.")
+    st.write("##### Decision: Not an important feature")
+    
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
 #plt.figure(figsize=(10, 10))
