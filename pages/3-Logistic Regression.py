@@ -135,6 +135,7 @@ with mode:
     st.write(f"Accuracy Score: {round(DT_SC*100, 2)}%")
 
 with median:
+    st.write("Fill Data with Median")
     df_num_median = fill_data_median(df_num)
     # Split the data into features (X) and target variable (y)
     y = df_num_median['Loan_Status']
@@ -174,8 +175,8 @@ with median:
     st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
     
     # Display cross-validation scores
-    mean_cv_score = np.mean(cv_scores)
-    st.write(f"The mean cross-validation score is: {mean_cv_score}")
+    mean_cv_score_median = np.mean(cv_scores)
+    st.write(f"The mean cross-validation score is: {mean_cv_score_median}")
     
     # Display the confusion matrix
     st.write("Confusion Matrix:")
@@ -189,8 +190,5 @@ with median:
     st.write("Prediction Summary by Species:")
     classification_report_str = classification_report(y_test, y_pred)
     st.text(classification_report_str)
-    
-    # Accuracy Score
-    DT_SC = accuracy_score(y_pred, y_test)
-    st.write(f"Accuracy Score: {round(DT_SC*100, 2)}%")
-    st.write("Fill Data with Median")
+
+
