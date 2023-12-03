@@ -41,8 +41,8 @@ with gender:
         # Credit_History
         plt.figure(figsize=(15,5))
         sns.countplot(x='Gender', hue='Loan_Status', data=df);
-        heatmap_fig = plt.gcf()  # Get the current figure
-        st.pyplot(heatmap_fig)
+        gender_fig = plt.gcf()  # Get the current figure
+        st.pyplot(gender_fig)
         
         # we didn't give a loan for most people who got Credit History = 0
         # but we did give a loan for most of people who got Credit History = 1
