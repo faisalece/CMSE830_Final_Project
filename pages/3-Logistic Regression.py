@@ -53,7 +53,8 @@ def fill_data_KNN(df):
     return df_repaired
 
 
-df_numerical = fill_data_median(df_num)
+#df_numerical = fill_data_median(df_num)
+df_numerical = fill_data_KNN(df_num)
 
 #st.write(df_numerical.head())
 
