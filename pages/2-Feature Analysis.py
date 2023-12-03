@@ -144,7 +144,7 @@ with property_area:
     property_area_fig = plt.gcf()  # Get the current figure
     st.pyplot(property_area_fig)
     st.write("Residents of Semi-Urban areas are more likely to secure loans compared to those in urban or rural areas.")
-    st.write("Decision: Important feature")
+    st.write("##### Decision: Important feature")
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
