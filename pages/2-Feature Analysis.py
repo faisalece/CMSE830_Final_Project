@@ -70,21 +70,3 @@ st.write("### Correlation Heatmap:")
 sns.heatmap(df_new.corr(), annot=True, cmap='coolwarm')
 heatmap_fig = plt.gcf()  # Get the current figure
 st.pyplot(heatmap_fig)
-
-
-
-
-column = st.sidebar.selectbox("Select a column", df_new.columns)
-bins = st.sidebar.slider("Number of bins", 5, 100, 20)
-st.write("Histogram:")
-fig, ax = plt.subplots()
-sns.histplot(data=df_new, x=column, hue="Loan_Status",bins=bins, kde=True)
-st.pyplot(fig)
-
-
-x_axis = st.sidebar.selectbox("Select x-axis", df_new.columns, index=0)
-y_axis = st.sidebar.selectbox("Select y-axis", df_new.columns, index=1)
-z_axis = st.sidebar.selectbox("Select z-axis", df_new.columns, index=2)
-st.subheader("3D Scatter Plot")
-fig = px.scatter_3d(df_new, x=x_axis, y=y_axis, z=z_axis, color='Loan_Status')
-st.plotly_chart(fig)
