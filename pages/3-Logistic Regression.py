@@ -63,7 +63,7 @@ X = df_numerical.drop('Loan_Status', axis=1)
 start_state = 42
 test_fraction = 0.2
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
-st.write(X_train, X_test, y_train, y_test)
+#st.write(X_train, X_test, y_train, y_test)
 
 # Standardize the features using StandardScaler
 scaler = StandardScaler()
