@@ -115,6 +115,16 @@ with loan_amount:
     st.pyplot(loan_amount_fig)
     st.write("##### Decision: No clear pattern observed.")
     
+with loan_amount_term:
+    #loan_amount_term
+    plt.figure(figsize=(15, 5))
+    sns.scatterplot(x='Loan_Amount_Term', y='Loan_Status', data=df)
+    plt.title("Loan Amount Term vs Loan_Status")
+    plt.xlabel("Loan Amount Term")
+    plt.ylabel("Loan_Status")
+   loan_amount_term_fig = plt.gcf()
+    st.pyplot(loan_amount_term_fig)
+    st.write("##### Decision: No clear pattern observed.")
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
 #plt.figure(figsize=(10, 10))
