@@ -35,7 +35,7 @@ st.write(df.describe())
 #tabs
 Gender, goal_tab, describe_tab, significance_tab, con_tab = st.tabs(["Gender", "Project Goal", "Describe the Dataset","Project Significance","Conclusion"])
 
-with intro_tab:
+with Gender:
     col3, col4 = st.columns([3, 2])
     with col3:
         # Credit_History
