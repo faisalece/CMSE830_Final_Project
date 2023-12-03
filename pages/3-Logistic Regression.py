@@ -98,7 +98,7 @@ st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
 
 # Display cross-validation scores
 mean_cv_score = np.mean(cv_scores)
-print(f"The mean cross-validation score is: {mean_cv_score}")
+st.write(f"The mean cross-validation score is: {mean_cv_score}")
 
 # Display the confusion matrix
 st.write("Confusion Matrix:")
