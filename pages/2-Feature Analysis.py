@@ -125,6 +125,29 @@ with loan_amount_term:
     loan_amount_term_fig = plt.gcf()
     st.pyplot(loan_amount_term_fig)
     st.write("##### Decision: No clear pattern observed.")
+
+with credit_history:
+    # credit_history
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='Credit_History', hue='Loan_Status', data=df);
+    credit_history_fig = plt.gcf()  # Get the current figure
+    st.pyplot(credit_history_fig)
+    st.write("We didn't approve loans for most people with Credit History = 0.")
+    st.write("However, we approved loans for most people with Credit History = 1.")
+    st.write("Conclusion: If you have Credit History = 1, you will have a better chance of getting a loan.")
+    st.write("##### Decision: Important feature")
+
+with property_area:
+    #Property_Area
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='Property_Area', hue='Loan_Status', data=df);
+    property_area_fig = plt.gcf()  # Get the current figure
+    st.pyplot(property_area_fig)
+    st.write("We didn't approve loans for most people with Credit History = 0.")
+    st.write("However, we approved loans for most people with Credit History = 1.")
+    st.write("Conclusion: If you have Credit History = 1, you will have a better chance of getting a loan.")
+    st.write("##### Decision: Important feature")
+    
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
 #plt.figure(figsize=(10, 10))
