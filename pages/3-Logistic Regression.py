@@ -72,9 +72,6 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-st.write(X_train_scaled)
-st.write(X_test_scaled)
-
 # Create and train the Logistic Regression classifier
 lr_classifier = LogisticRegression()
 lr_model = lr_classifier.fit(X_train_scaled, y_train)
@@ -92,7 +89,7 @@ y_pred = lr_model.predict(X_test_scaled)
 conf_mat = confusion_matrix(y_test, y_pred)
 
 # Streamlit app display
-st.title("Loan Status Prediction App")
+st.title("Loan Status Prediction Using Logistic Regression")
 
 # Display test set score
 st.write(f"The score of the model on the test set is {test_score}")
@@ -103,4 +100,5 @@ st.write(f"The cross-validation scores are: {cv_scores}")
 # Display the confusion matrix
 st.write("Confusion Matrix:")
 ConfusionMatrixDisplay(conf_mat, display_labels=['Approved', 'Not Approved']).plot()
-st.pyplot()
+confusion_mean_fill_fig = plt.gcf()  # Get the current figure
+st.pyplot(confusion_mean_fill_fig)
