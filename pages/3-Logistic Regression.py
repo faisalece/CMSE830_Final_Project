@@ -119,9 +119,9 @@ st.pyplot(confusion_mean_fill_fig)
 
 # Prediction Summary by Species
 st.write("Prediction Summary by Species:")
-classification_report_str = classification_report(y_test, y_predict)
+classification_report_str = classification_report(y_test, y_pred)
 st.text(classification_report_str)
 
 # Accuracy Score
-DT_SC = accuracy_score(y_predict, y_test)
+DT_SC = accuracy_score(y_pred, y_test)
 st.write(f"Accuracy Score: {round(DT_SC*100, 2)}%")
