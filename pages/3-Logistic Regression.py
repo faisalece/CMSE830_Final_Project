@@ -70,167 +70,58 @@ def fill_data_mode(df):
 st.title("Loan Status Prediction Using Logistic Regression")
     
 
-#tabs
-mode,median,KNN= st.tabs(["Fill Data By Mode", "Fill Data By Median", "Fill Data By KNN"])
 
-with mode:
-    st.write("Fill Data with Mode")
-    df_num_mode = fill_data_mode(df_num)
-    # Split the data into features (X) and target variable (y)
-    y1 = df_num_mode['Loan_Status']
-    X1 = df_num_mode.drop('Loan_Status', axis=1)
-    
-    # Split the data into training and testing sets
-    start_state = 42
-    test_fraction = 0.2
-    X_train1, X_test1, y_train1, y_test1 = train_test_split(X1, y1, test_size=test_fraction, random_state=start_state)
-    #st.write(X_train1, X_test1, y_train1, y_test1)
-    
-    # Standardize the features using StandardScaler
-    scaler = StandardScaler()
-    X_train_scaled1 = scaler.fit_transform(X_train1)
-    X_test_scaled1 = scaler.transform(X_test1)
-    
-    # Create and train the Logistic Regression classifier
-    lr_classifier1 = LogisticRegression()
-    lr_model1 = lr_classifier1.fit(X_train_scaled1, y_train1)
-    
-    # Evaluate the model on the test set
-    test_score1 = lr_model1.score(X_test_scaled1, y_test1)
-    
-    # Perform cross-validation
-    cv_scores1 = cross_val_score(lr_classifier1, X1, y1, cv=5)
-    
-    # Make predictions on the test set
-    y_pred1 = lr_model1.predict(X_test_scaled1)
+st.write("Fill Data with Mode")
+df_num_mode = fill_data_mode(df_num)
+# Split the data into features (X) and target variable (y)
+y = df_num_mode['Loan_Status']
+X = df_num_mode.drop('Loan_Status', axis=1)
 
-    # Display test set score
-    st.write(f"The accuracy of the model on the test set is {test_score1:.2%}")
-    
-    # Display cross-validation scores
-    mean_cv_score1 = np.mean(cv_scores1)
-    st.write(f"The mean cross-validation score is: {mean_cv_score1}")
-    
-    # Display the confusion matrix
-    st.write("Confusion Matrix:")
-    #ConfusionMatrixDisplay.from_estimator(lr_classifier1, X_test_scaled1, y_test1)
-    conf_mat1 = confusion_matrix(y_test1, y_pred1)
-    ConfusionMatrixDisplay(conf_mat1, display_labels=['Not Approved','Approved']).plot()
-    confusion_mean_fill_fig1 = plt.gcf()  # Get the current figure
-    st.pyplot(confusion_mean_fill_fig1)
-    
-    # Prediction Summary by Species
-    st.write("Prediction Summary by Species:")
-    classification_report_str1 = classification_report(y_test1, y_pred1)
-    st.text(classification_report_str1)
+# Split the data into training and testing sets
+start_state = 42
+test_fraction = 0.2
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
+#st.write(X_train, X_test, y_train, y_test)
 
+# Standardize the features using StandardScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-with median:
-    st.write("Fill Data with Median")
-    df_num_median = fill_data_median(df_num)
-    # Split the data into features (X) and target variable (y)
-    y = df_num_median['Loan_Status']
-    X = df_num_median.drop('Loan_Status', axis=1)
-    
-    # Split the data into training and testing sets
-    start_state = 42
-    test_fraction = 0.2
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
-    #st.write(X_train, X_test, y_train, y_test)
-    
-    # Standardize the features using StandardScaler
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
-    
-    # Create and train the Logistic Regression classifier
-    lr_classifier = LogisticRegression()
-    lr_model = lr_classifier.fit(X_train_scaled, y_train)
-    
-    # Evaluate the model on the test set
-    test_score = lr_model.score(X_test_scaled, y_test)
-    
-    # Perform cross-validation
-    cv_scores = cross_val_score(lr_classifier, X, y, cv=5)
-    
-    # Make predictions on the test set
-    y_pred = lr_model.predict(X_test_scaled)
-    
-    # Generate and display the confusion matrix
-    conf_mat = confusion_matrix(y_test, y_pred)
-    
-    # Display test set score
-    st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
-    
-    # Display cross-validation scores
-    mean_cv_score_median = np.mean(cv_scores)
-    st.write(f"The mean cross-validation score is: {mean_cv_score_median}")
-    
-    # Display the confusion matrix
-    st.write("Confusion Matrix:")
-    #ConfusionMatrixDisplay.from_estimator(lr_classifier, X_test_scaled, y_test)
-    conf_mat = confusion_matrix(y_test, y_pred)
-    ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
-    confusion_mean_fill_fig = plt.gcf()  # Get the current figure
-    st.pyplot(confusion_mean_fill_fig)
-    
-    # Prediction Summary by Species
-    st.write("Prediction Summary by Species:")
-    classification_report_str = classification_report(y_test, y_pred)
-    st.text(classification_report_str)
+# Create and train the Logistic Regression classifier
+lr_classifier = LogisticRegression()
+lr_model = lr_classifier.fit(X_train_scaled, y_train)
 
-with KNN:
-    st.write("Fill Data with KNN")
-    df_num_KNN = fill_data_KNN(df_num)
-    # Split the data into features (X) and target variable (y)
-    y = df_num_KNN['Loan_Status']
-    X = df_num_KNN.drop('Loan_Status', axis=1)
-    
-    # Split the data into training and testing sets
-    start_state = 42
-    test_fraction = 0.2
-    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
-    #st.write(X_train, X_test, y_train, y_test)
-    
-    # Standardize the features using StandardScaler
-    scaler = StandardScaler()
-    X_train_scaled = scaler.fit_transform(X_train)
-    X_test_scaled = scaler.transform(X_test)
-    
-    # Create and train the Logistic Regression classifier
-    lr_classifier = LogisticRegression()
-    lr_model = lr_classifier.fit(X_train_scaled, y_train)
-    
-    # Evaluate the model on the test set
-    test_score = lr_model.score(X_test_scaled, y_test)
-    
-    # Perform cross-validation
-    cv_scores = cross_val_score(lr_classifier, X, y, cv=5)
-    
-    # Make predictions on the test set
-    y_pred = lr_model.predict(X_test_scaled)
-    
-    # Generate and display the confusion matrix
-    conf_mat = confusion_matrix(y_test, y_pred)
-    
-    # Display test set score
-    st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
-    
-    # Display cross-validation scores
-    mean_cv_score_median = np.mean(cv_scores)
-    st.write(f"The mean cross-validation score is: {mean_cv_score_median}")
-    
-    # Display the confusion matrix
-    st.write("Confusion Matrix:")
-    #ConfusionMatrixDisplay.from_estimator(lr_classifier, X_test_scaled, y_test)
-    conf_mat = confusion_matrix(y_test, y_pred)
-    ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
-    confusion_mean_fill_fig = plt.gcf()  # Get the current figure
-    st.pyplot(confusion_mean_fill_fig)
-    
-    # Prediction Summary by Species
-    st.write("Prediction Summary by Species:")
-    classification_report_str = classification_report(y_test, y_pred)
-    st.text(classification_report_str)
+# Evaluate the model on the test set
+test_score = lr_model.score(X_test_scaled, y_test)
+
+# Perform cross-validation
+cv_scores = cross_val_score(lr_classifier, X, y, cv=5)
+
+# Make predictions on the test set
+y_pred = lr_model.predict(X_test_scaled)
+
+# Generate and display the confusion matrix
+conf_mat = confusion_matrix(y_test, y_pred)
+
+# Display test set score
+st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
+
+# Display cross-validation scores
+mean_cv_score_median = np.mean(cv_scores)
+st.write(f"The mean cross-validation score is: {mean_cv_score_median}")
+
+# Display the confusion matrix
+st.write("Confusion Matrix:")
+#ConfusionMatrixDisplay.from_estimator(lr_classifier, X_test_scaled, y_test)
+conf_mat = confusion_matrix(y_test, y_pred)
+ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
+confusion_mean_fill_fig = plt.gcf()  # Get the current figure
+st.pyplot(confusion_mean_fill_fig)
+
+# Prediction Summary by Species
+st.write("Prediction Summary by Species:")
+classification_report_str = classification_report(y_test, y_pred)
+st.text(classification_report_str)
 
 
