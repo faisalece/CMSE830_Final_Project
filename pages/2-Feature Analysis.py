@@ -81,6 +81,14 @@ with self_employed:
     Self_Employed_fig = plt.gcf()  # Get the current figure
     st.pyplot(Self_Employed_fig)
     st.write("##### Decision: No pattern (same as Education)")
+
+with applicant_income:
+    # ApplicantIncome
+    plt.figure(figsize=(15,5))
+    sns.countplot(x='ApplicantIncome', hue='Loan_Status', data=df);
+    ApplicantIncome_fig = plt.gcf()  # Get the current figure
+    st.pyplot(ApplicantIncome_fig)
+    st.write("##### No clear pattern observed.")
     
 df_new = to_numeric(df)
 st.write("### Correlation Heatmap:")
