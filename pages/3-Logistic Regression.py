@@ -53,6 +53,8 @@ def fill_data_KNN(df):
 
 df_numerical = fill_data_median(df_num)
 
+st.write(df_numerical.head())
+
 # Split the data into features (X) and target variable (y)
 y = df_numerical['Loan_Status']
 X = df_numerical.drop('Loan_Status', axis=1)
