@@ -101,7 +101,7 @@ ax[1].set_title('Cross-Validation Score Comparison')
 st.pyplot(fig)
 
 # Display detailed results for each model
-st.subheader("### Decision Summary:")
+st.subheader("Decision Summary:")
 st.write("Upon careful analysis of the model comparison results for loan status prediction, it is observed that `LogisticRegression` and `DecisionTreeClassifier` demonstrate superior performance on the provided dataset. This conclusion is drawn from the following key observations:")
 
 st.write("1. **Accuracy Comparison:**")
