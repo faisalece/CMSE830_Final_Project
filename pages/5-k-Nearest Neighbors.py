@@ -89,7 +89,7 @@ X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
 # Create and train the KNeighborsClassifier
-n_neighbors = 2
+n_neighbors = 20
 knn_classifier = KNeighborsClassifier(n_neighbors)
 knn_model = knn_classifier.fit(X_train_scaled, y_train)
 
