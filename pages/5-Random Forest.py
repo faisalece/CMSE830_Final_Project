@@ -79,8 +79,12 @@ for n_estimators in n_estimators_values:
 # Display the best n_estimators and corresponding accuracy
 st.write(f"The best n_estimators is {best_n_estimators} with an accuracy of {best_accuracy:.2%}")
 
+n_estimators = st.slider("Number of Estimators", 10, 200, 100)
+rf_classifier = RandomForestClassifier(n_estimators=n_estimators, random_state=start_state)
+rf_model = rf_classifier.fit(X_train_scaled, y_train)
+
 # Create and train the Random Forest classifier using the best n_estimators
-rf_classifier = RandomForestClassifier(n_estimators=best_n_estimators, random_state=start_state)
+rf_classifier = RandomForestClassifier(n_estimators=n_estimators, random_state=start_state)
 rf_model = rf_classifier.fit(X_train_scaled, y_train)
 
 # Perform cross-validation
