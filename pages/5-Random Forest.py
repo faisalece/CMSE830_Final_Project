@@ -83,10 +83,6 @@ n_estimators = st.slider("Number of Estimators", 10, 200, 100)
 rf_classifier = RandomForestClassifier(n_estimators=n_estimators, random_state=start_state)
 rf_model = rf_classifier.fit(X_train_scaled, y_train)
 
-# Create and train the Random Forest classifier using the best n_estimators
-rf_classifier = RandomForestClassifier(n_estimators=n_estimators, random_state=start_state)
-rf_model = rf_classifier.fit(X_train_scaled, y_train)
-
 # Perform cross-validation
 cv_scores = cross_val_score(rf_classifier, X, y, cv=5)
 
