@@ -6,7 +6,6 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
-from matplotlib.animation import FuncAnimation
 
 # Load the dataset
 def load_data():
@@ -115,17 +114,12 @@ st.write("Prediction Summary by Species:")
 classification_report_str = classification_report(y_test, y_pred)
 st.text(classification_report_str)
 
-# Animated Plot
+# Display a non-animated plot
 fig, ax = plt.subplots(figsize=(8, 6))
-
-def update(frame):
-    ax.clear()
-    ax.plot(data['Loan_ID'].index, data['Loan_Status'], label='All Data', color='blue')
-    ax.plot(y_test.index, y_test, label='True Values', marker='o', linestyle='', color='green')
-    ax.plot(y_test.index, y_pred, label='Predicted Values', marker='x', linestyle='', color='red')
-    ax.set_xlabel('Loan ID')
-    ax.set_ylabel('Loan Status')
-    ax.legend()
-
-animation = FuncAnimation(fig, update, frames=len(y_test), interval=500)
+ax.plot(data['Loan_ID'].index, data['Loan_Status'], label='All Data', color='blue')
+ax.plot(y_test.index, y_test, label='True Values', marker='o', linestyle='', color='green')
+ax.plot(y_test.index, y_pred, label='Predicted Values', marker='x', linestyle='', color='red')
+ax.set_xlabel('Loan ID')
+ax.set_ylabel('Loan Status')
+ax.legend()
 st.pyplot(fig)
