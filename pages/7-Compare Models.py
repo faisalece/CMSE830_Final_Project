@@ -71,8 +71,9 @@ models = {
     'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state)
 }
 
-# Dictionary to store maximum accuracy for each model
+# Dictionary to store maximum accuracy and cross-validation score for each model
 max_accuracies = {}
+mean_cv_scores = {}
 
 # Evaluate each model
 for model_name, model in models.items():
@@ -80,11 +81,24 @@ for model_name, model in models.items():
     test_score = model.score(X_test_scaled, y_test)
     max_accuracies[model_name] = test_score
 
+    # Cross-validation scores
+    cv_scores = cross_val_score(model, X, y, cv=5)
+    mean_cv_score = np.mean(cv_scores)
+    mean_cv_scores[model_name] = mean_cv_score
+
 # Bar plot for maximum accuracies
-fig, ax = plt.subplots()
-ax.bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red'])
-ax.set_ylabel('Accuracy')
-ax.set_title('Maximum Accuracy Comparison')
+fig, ax = plt.subplots(2, 1, figsize=(8, 10))
+
+# Plot Maximum Accuracy
+ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red'])
+ax[0].set_ylabel('Accuracy')
+ax[0].set_title('Maximum Accuracy Comparison')
+
+# Plot Cross-Validation Scores
+ax[1].bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red'])
+ax[1].set_ylabel('Cross-Validation Score')
+ax[1].set_title('Cross-Validation Score Comparison')
+
 st.pyplot(fig)
 
 # Display detailed results for each model
@@ -93,8 +107,7 @@ for model_name, model in models.items():
     st.write(f"### {model_name}")
     
     # Cross-validation scores
-    cv_scores = cross_val_score(model, X, y, cv=5)
-    mean_cv_score = np.mean(cv_scores)
+    mean_cv_score = mean_cv_scores[model_name]
     st.write(f"Mean Cross-validation Score: {mean_cv_score:.2%}")
     
     # Confusion Matrix
@@ -111,5 +124,3 @@ for model_name, model in models.items():
     st.write("Classification Report:")
     st.text(classification_report_str)
     st.write("---")
-
-# Add your additional professional-looking plots here
