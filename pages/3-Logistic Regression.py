@@ -67,7 +67,7 @@ def fill_data_mode(df):
 
     
 # Streamlit app display
-st.title("Loan Status Prediction Using Logistic Regression")
+st.title("Loan Status Prediction Using Support Vector Machine")
     
 
 
