@@ -2,15 +2,10 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import seaborn as sns
-import plotly.express as px
-
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
 from sklearn.svm import SVC
-from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
-from sklearn.impute import KNNImputer
-from sklearn.metrics import classification_report, accuracy_score
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
 
 # Load the dataset
 def load_data():
@@ -36,43 +31,19 @@ def to_numeric(df):
     return data
 df_num = to_numeric(df)
 
-
-def fill_data_median(df):
-    #Fill up data with median
-    df['Credit_History'].fillna(value=df['Credit_History'].median(),inplace=True)
-    df['Self_Employed'].fillna(value=df['Self_Employed'].median(),inplace=True)
-    df['LoanAmount'].fillna(value=df['LoanAmount'].median(),inplace=True)
-    df['Dependents'].fillna(value=df['Dependents'].median(),inplace=True)
-    df['Loan_Amount_Term'].fillna(value=df['Loan_Amount_Term'].median(),inplace=True)
-    df['Gender'].fillna(value=df['Gender'].median(),inplace=True)
-    df['Married'].fillna(value=df['Married'].median(),inplace=True)
-    return df
-        
-def fill_data_KNN(df):
-    #Fill up data with KNN
-    my_imputer = KNNImputer(n_neighbors=5, weights='distance', metric='nan_euclidean')
-    df_repaired = pd.DataFrame(my_imputer.fit_transform(df), columns=df.columns)
-    return df_repaired
-
 def fill_data_mode(df):
-    #Fill up data with mode
+    # Fill up data with mode
     null_cols = ['Credit_History', 'Self_Employed', 'LoanAmount','Dependents', 'Loan_Amount_Term', 'Gender', 'Married']
     for col in null_cols:
-        df[col] = df[col].fillna(
-        df[col].dropna().mode().values[0] )  
+        df[col] = df[col].fillna(df[col].dropna().mode().values[0])
     return df
 
-
-#st.write(df_numerical.head())
-
-    
 # Streamlit app display
 st.title("Loan Status Prediction Using Support Vector Machine")
-    
-
 
 st.write("Fill Data with Mode")
 df_num_mode = fill_data_mode(df_num)
+
 # Split the data into features (X) and target variable (y)
 y = df_num_mode['Loan_Status']
 X = df_num_mode.drop('Loan_Status', axis=1)
@@ -81,15 +52,15 @@ X = df_num_mode.drop('Loan_Status', axis=1)
 start_state = 42
 test_fraction = 0.2
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
-#st.write(X_train, X_test, y_train, y_test)
 
 # Standardize the features using StandardScaler
 scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Create and train the SVM classifier
-svm_classifier = SVC(kernel='linear', C=5)
+# Create and train the Support Vector Machine classifier
+C = st.slider("Regularization Parameter (C)", 0.1, 10.0, 1.0)
+svm_classifier = SVC(C=C, kernel='linear')  # You can try different kernels, e.g., 'rbf'
 svm_model = svm_classifier.fit(X_train_scaled, y_train)
 
 # Evaluate the model on the test set
@@ -108,12 +79,11 @@ conf_mat = confusion_matrix(y_test, y_pred)
 st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
 
 # Display cross-validation scores
-mean_cv_score_median = np.mean(cv_scores)
-st.write(f"The mean cross-validation score is: {mean_cv_score_median}")
+mean_cv_score_mode = np.mean(cv_scores)
+st.write(f"The mean cross-validation score is: {mean_cv_score_mode}")
 
 # Display the confusion matrix
 st.write("Confusion Matrix:")
-#ConfusionMatrixDisplay.from_estimator(lr_classifier, X_test_scaled, y_test)
 conf_mat = confusion_matrix(y_test, y_pred)
 ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
 confusion_mean_fill_fig = plt.gcf()  # Get the current figure
@@ -123,5 +93,3 @@ st.pyplot(confusion_mean_fill_fig)
 st.write("Prediction Summary by Species:")
 classification_report_str = classification_report(y_test, y_pred)
 st.text(classification_report_str)
-
-
