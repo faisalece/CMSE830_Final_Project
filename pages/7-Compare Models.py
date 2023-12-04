@@ -102,25 +102,4 @@ ax[1].set_title('Cross-Validation Score Comparison')
 st.pyplot(fig)
 
 # Display detailed results for each model
-st.subheader("Model Comparison Details:")
-for model_name, model in models.items():
-    st.write(f"### {model_name}")
-    
-    # Cross-validation scores
-    mean_cv_score = mean_cv_scores[model_name]
-    st.write(f"Mean Cross-validation Score: {mean_cv_score:.2%}")
-    
-    # Confusion Matrix
-    y_pred = model.predict(X_test_scaled)
-    conf_mat = confusion_matrix(y_test, y_pred)
-    st.write("Confusion Matrix:")
-    st.write(conf_mat)
-    ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
-    confusion_fig = plt.gcf()
-    st.pyplot(confusion_fig)
-
-    # Classification Report
-    classification_report_str = classification_report(y_test, y_pred)
-    st.write("Classification Report:")
-    st.text(classification_report_str)
-    st.write("---")
+st.subheader("Based on above information `LogisticRegression` and `DecisionTreeClassifier` are better for this dataset as their Accuracy and Cross-Validation Score are high.")
