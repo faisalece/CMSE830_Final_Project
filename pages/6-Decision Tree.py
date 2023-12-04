@@ -1,95 +1,115 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
 import numpy as np
-import seaborn as sns
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.preprocessing import StandardScaler
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
 
-st.image("FED.png", use_column_width="always")
+# Load the dataset
+def load_data():
+    data = pd.read_csv('train.csv')
+    return data
 
+data = load_data()
 
-# Sample DataFrame with date column
+# Do not use inplace=True here
+df = data.drop('Loan_ID', axis=1)
 
+def to_numeric(df):
+    to_numeric = {'Male': 1, 'Female': 2,
+    'Yes': 1, 'No': 2,
+    'Graduate': 1, 'Not Graduate': 2,
+    'Urban': 3, 'Semiurban': 2, 'Rural': 1,
+    'Y': 1, 'N': 0,
+    '3+': 3}
 
-ran=pd.read_csv('./Data/fifa2021.csv')
-GDP1=pd.read_csv('./Data/GDP1.csv')
-GDP2=pd.read_csv('./Data/GDP2.csv')
-HDI=pd.read_csv('./Data/HDI.csv')
-pop=pd.read_csv('./Data/pop.csv')
-ran=ran[['rank','country_full','total_points','confederation']]
-GDP1=GDP1[['Country or Area','Value']]
-GDP2=GDP2[['Country or Area','Value']]
-HDI=HDI[['Country','Value']]
-pop=pop[['Country (or dependency)','Population (2020)']]
-ran = ran.rename(columns={'country_full': 'Country','total_points' : 'FIFA_Points','rank' : 'FIFA_Rank'})
-GDP1 = GDP1.rename(columns={'Country or Area': 'Country','Value' : 'GDP_per_capita'})
-GDP2 = GDP2.rename(columns={'Country or Area': 'Country','Value' : 'GDP_gross'})
-HDI = HDI.rename(columns={'Value' : 'HDI'})
-pop = pop.rename(columns={'Country (or dependency)': 'Country','Population (2020)' : 'Population'})
-ran = ran.merge(GDP1, on='Country')
-ran = ran.merge(GDP2, on='Country')
-ran = ran.merge(HDI, on='Country')
-ran = ran.merge(pop, on='Country')
+    # No need for inplace=True here
+    data = df.applymap(lambda label: to_numeric.get(label) if label in to_numeric else label)
 
+    return data
 
+df_num = to_numeric(df)
 
-st.title("FIFA Confederations")
-st.write("There are six confederations recognized by FIFA which oversee the game in the different continents and regions of the world.")
-st.write("* **AFC**: Asian Football Confederation (47 members)")
-st.write("* **CAF**: Confederation of African Football (56 members)")
-st.write("* **CONCACAF**: Confederation of North, Central American and Caribbean Association Football (41 members)")
-st.write("* **CONMEBOL**: Confederación Sudamericana de Fútbol (10 members)")
-st.write("* **OFC**: Oceania Football Confederation (13 members)")
-st.write("* **UEFA**: Union of European Football Associations (55 members)")
+def fill_data_mode(df):
+    # Fill up data with mode
+    null_cols = ['Credit_History', 'Self_Employed', 'LoanAmount','Dependents', 'Loan_Amount_Term', 'Gender', 'Married']
+    for col in null_cols:
+        df[col] = df[col].fillna(df[col].dropna().mode().values[0])
+    return df
 
+# Streamlit app display
+st.title("Loan Status Prediction Using Decision Tree")
 
-# Load your DataFrame
-# Replace 'your_data.csv' with the actual path or URL to your data file
-data = ran
+st.write("Fill Data with Mode")
+df_num_mode = fill_data_mode(df_num)
 
-st.title("Global Metrics")
+# Split the data into features (X) and target variable (y)
+y = df_num_mode['Loan_Status']
+X = df_num_mode.drop('Loan_Status', axis=1)
 
-st.write("This part provides an interactive tool where you can manipulate parameters for countries to investigate correlations and distributions through joint plots. Data categories include GDP, HDI, population, FIFA points, and more. Furthermore, you have the option to categorize data by confederation.")
+# Split the data into training and testing sets
+start_state = 42
+test_fraction = 0.2
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
 
+# Standardize the features using StandardScaler
+scaler = StandardScaler()
+X_train_scaled = scaler.fit_transform(X_train)
+X_test_scaled = scaler.transform(X_test)
 
-# Select columns for x and y axes
-x_column = st.selectbox("Select X-Axis Column", data.columns.drop(['Country', 'confederation']),index=4)
-y_column = st.selectbox("Select Y-Axis Column", data.columns.drop(['Country', 'confederation']),index=1)
+# Create a range of max_depth values to try
+max_depth_values = list(range(1, 21))
 
-# Add logarithmic scale options
+# Initialize variables to store best parameters and accuracy
+best_max_depth = None
+best_accuracy = 0.0
 
-st.write("For parameters such as GDP and population, it's advisable to use a log scale when analyzing the data.")
-log_x = st.checkbox("Logarithmic X-Axis", value=False)
-log_y = st.checkbox("Logarithmic Y-Axis", value=False)
+# Perform grid search
+for max_depth in max_depth_values:
+    dt_classifier = DecisionTreeClassifier(max_depth=max_depth, random_state=start_state)
+    dt_model = dt_classifier.fit(X_train_scaled, y_train)
+    test_score = dt_model.score(X_test_scaled, y_test)
 
-selected_confederations = st.multiselect("Select Confederations", data['confederation'].unique(),default=['UEFA','AFC','CAF'])
-filtered_data = data[data['confederation'].isin(selected_confederations)]
+    # Update best parameters if the current model is better
+    if test_score > best_accuracy:
+        best_accuracy = test_score
+        best_max_depth = max_depth
 
+# Display the best max_depth and corresponding accuracy
+st.write(f"The best max_depth is {best_max_depth} with an accuracy of {best_accuracy:.2%}")
 
-# Create the scatterplot
-g = sns.jointplot(data=filtered_data, x=x_column, y=y_column, kind="scatter", height=6)
-f = sns.jointplot(data=filtered_data, x=x_column,y=y_column, hue="confederation")
+max_depth_value = st.slider("Max Depth", 1, 20, 5)
+dt_classifier = DecisionTreeClassifier(max_depth=max_depth_value, random_state=start_state)
+dt_model = dt_classifier.fit(X_train_scaled, y_train)
 
+# Evaluate the model on the test set
+current_test_score = dt_model.score(X_test_scaled, y_test)
+# Perform cross-validation
+cv_scores = cross_val_score(dt_classifier, X, y, cv=5)
 
-# Set logarithmic scales if selected
-if log_x:
-    g.ax_joint.set_xscale('log')
-    f.ax_joint.set_xscale('log')
+# Make predictions on the test set
+y_pred = dt_model.predict(X_test_scaled)
 
-if log_y:
-    g.ax_joint.set_yscale('log')
-    f.ax_joint.set_yscale('log')
+# Generate and display the confusion matrix
+conf_mat = confusion_matrix(y_test, y_pred)
 
-st.pyplot(plt)
+# Display test set score
+st.write(f"The accuracy of the model on the test set is {current_test_score:.2%} for max_depth = {max_depth_value}")
 
-# Display the DataFrame for reference
+# Display cross-validation scores
+mean_cv_score_mode = np.mean(cv_scores)
+st.write(f"The mean cross-validation score is: {mean_cv_score_mode}")
 
-# Call the update function with initial values
+# Display the confusion matrix
+st.write("Confusion Matrix:")
+conf_mat = confusion_matrix(y_test, y_pred)
+ConfusionMatrixDisplay(conf_mat, display_labels=['Not Approved','Approved']).plot()
+confusion_mean_fill_fig = plt.gcf()  # Get the current figure
+st.pyplot(confusion_mean_fill_fig)
 
-
-st.title("Definition of parameters")
-st.write("* **FIFA Rank**: A ranking system that evaluates national soccer teams' performance.")
-st.write("* **FIFA Points**: Points awarded to soccer teams based on their match outcomes.")
-st.write("* **GDP gross**: The total value of goods and services produced in a country's economy.")
-st.write("* **GDP per capita**: The economic output per person in a country.")
-st.write("* **HDI**: The Human Development Index, measuring a country's overall well-being.")
-st.write("* **Population**: The total number of inhabitants in a specific region or country.")
+# Prediction Summary by Species
+st.write("Prediction Summary by Species:")
+classification_report_str = classification_report(y_test, y_pred)
+st.text(classification_report_str)
