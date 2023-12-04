@@ -46,7 +46,6 @@ def fill_data_mode(df):
 st.title("Loan Status Prediction Comparison")
 
 # Load and preprocess data
-st.write("Fill Data with Mode")
 df_num_mode = fill_data_mode(to_numeric(df))
 
 # Split the data into features (X) and target variable (y)
