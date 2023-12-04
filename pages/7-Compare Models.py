@@ -101,4 +101,24 @@ ax[1].set_title('Cross-Validation Score Comparison')
 st.pyplot(fig)
 
 # Display detailed results for each model
-st.subheader("Based on above information `LogisticRegression` and `DecisionTreeClassifier` are better for this dataset as their Accuracy and Cross-Validation Score are high.")
+st.subheader("### Decision Summary:")
+st.write("Upon careful analysis of the model comparison results for loan status prediction, it is observed that `LogisticRegression` and `DecisionTreeClassifier` demonstrate superior performance on the provided dataset. This conclusion is drawn from the following key observations:")
+
+st.write("1. **Accuracy Comparison:**")
+st.write("   - Both `LogisticRegression` and `DecisionTreeClassifier` exhibit high accuracy in predicting loan status on the test set.")
+st.write("   - The accuracy comparison chart illustrates their exceptional predictive power.")
+
+st.write("2. **Cross-Validation Score:**")
+st.write("   - The models' cross-validation scores further validate their robustness and reliability across diverse subsets of the dataset.")
+st.write("   - Notably, both models consistently achieve high mean cross-validation scores, indicating their effectiveness in generalizing to new, unseen data.")
+
+st.write("3. **Additional Insights:**")
+st.write("   - Detailed analysis, including confusion matrices and classification reports, reinforces the models' proficiency in capturing nuanced patterns within the data.")
+
+st.write("### Recommendations:")
+
+st.write("Based on the comprehensive evaluation, it is recommended to consider either `LogisticRegression` or `DecisionTreeClassifier` for loan status prediction tasks on similar datasets. These models showcase a balanced blend of accuracy and generalization ability, making them well-suited for practical applications.")
+
+st.write("### Further Considerations:")
+
+st.write("While these models demonstrate strong performance on the current dataset, it is advisable to conduct additional assessments on diverse datasets and evaluate their performance under different scenarios. Continuous monitoring and periodic re-evaluation of model performance ensure adaptability to evolving data patterns and maintain the models' predictive efficacy over time.")
