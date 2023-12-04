@@ -63,12 +63,12 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Define models
+# Define models with best hyperparameters
 models = {
     'Logistic Regression': LogisticRegression(random_state=start_state),
     'Random Forest': RandomForestClassifier(n_estimators=100, random_state=start_state),
-    'k-Nearest Neighbor': KNeighborsClassifier(),
-    'Decision Tree': DecisionTreeClassifier(random_state=start_state)
+    'k-Nearest Neighbor': KNeighborsClassifier(n_neighbors=9),
+    'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state)
 }
 
 # Dictionary to store maximum accuracy for each model
@@ -86,9 +86,6 @@ ax.bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', '
 ax.set_ylabel('Accuracy')
 ax.set_title('Maximum Accuracy Comparison')
 st.pyplot(fig)
-
-# Additional professional-looking plots
-# Add your additional plots here
 
 # Display detailed results for each model
 st.subheader("Model Comparison Details:")
@@ -116,4 +113,3 @@ for model_name, model in models.items():
     st.write("---")
 
 # Add your additional professional-looking plots here
-
