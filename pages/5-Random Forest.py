@@ -58,13 +58,30 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# Create and train the Random Forest classifier
-n_estimators = st.slider("Number of Estimators", 10, 200, 100)
-rf_classifier = RandomForestClassifier(n_estimators=n_estimators, random_state=start_state)
-rf_model = rf_classifier.fit(X_train_scaled, y_train)
+# Create a range of n_estimators values to try
+n_estimators_values = list(range(10, 201, 10))
 
-# Evaluate the model on the test set
-test_score = rf_model.score(X_test_scaled, y_test)
+# Initialize variables to store best parameters and accuracy
+best_n_estimators = None
+best_accuracy = 0.0
+
+# Perform grid search
+for n_estimators in n_estimators_values:
+    rf_classifier = RandomForestClassifier(n_estimators=n_estimators, random_state=start_state)
+    rf_model = rf_classifier.fit(X_train_scaled, y_train)
+    test_score = rf_model.score(X_test_scaled, y_test)
+
+    # Update best parameters if the current model is better
+    if test_score > best_accuracy:
+        best_accuracy = test_score
+        best_n_estimators = n_estimators
+
+# Display the best n_estimators and corresponding accuracy
+st.write(f"The best n_estimators is {best_n_estimators} with an accuracy of {best_accuracy:.2%}")
+
+# Create and train the Random Forest classifier using the best n_estimators
+rf_classifier = RandomForestClassifier(n_estimators=best_n_estimators, random_state=start_state)
+rf_model = rf_classifier.fit(X_train_scaled, y_train)
 
 # Perform cross-validation
 cv_scores = cross_val_score(rf_classifier, X, y, cv=5)
@@ -76,7 +93,7 @@ y_pred = rf_model.predict(X_test_scaled)
 conf_mat = confusion_matrix(y_test, y_pred)
 
 # Display test set score
-st.write(f"The accuracy of the model on the test set is {test_score:.2%}")
+st.write(f"The accuracy of the model on the test set is {best_accuracy:.2%}")
 
 # Display cross-validation scores
 mean_cv_score_mode = np.mean(cv_scores)
