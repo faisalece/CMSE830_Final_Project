@@ -84,6 +84,28 @@ with describe_tab:
     st.subheader("Missing Values:")
     st.write(data.isnull().sum())
 
+    df_num = to_numeric(df)
+
+    def fill_data_mode(df):
+        # Fill up data with mode
+        null_cols = ['Credit_History', 'Self_Employed', 'LoanAmount','Dependents', 'Loan_Amount_Term', 'Gender', 'Married']
+        for col in null_cols:
+            df[col] = df[col].fillna(df[col].dropna().mode().values[0])
+        return df
+    
+    #st.write("Fill Data with Mode")
+    df = fill_data_mode(df_num)
+    data = df
+
+    
+    # Distribution of Loan Amount
+    st.subheader("Distribution of data:")
+    column = st.selectbox("Select a column", data.columns)
+    bins = st.slider("Number of bins", 5, 100, 20)
+    st.write("Histogram:")
+    fig, ax = plt.subplots()
+    sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
+    st.pyplot(fig)
 
     # Boxplot of Applicant Income by Education
     st.subheader("Applicant Income Distribution by Education:")
