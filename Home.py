@@ -45,13 +45,13 @@ with intro_tab:
     with col4:
         st.image("loan_give.jpeg", caption="Here is your loan amount.", use_column_width=True)
 
-        st.markdown('[Source : Kaggle Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)')
-        # Add a slider for selecting the number of rows to display
-        num_rows = st.slider("Number of Rows", 1, 600, 100)
+    st.markdown('[Source : Kaggle Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)')
+    # Add a slider for selecting the number of rows to display
+    num_rows = st.slider("Number of Rows", 1, 600, 100)
 
-        # Display the selected number of rows
-        st.write(f"Displaying top {num_rows} rows:")
-        st.write(data.head(num_rows))
+    # Display the selected number of rows
+    st.write(f"Displaying top {num_rows} rows:")
+    st.write(data.head(num_rows))
     with goal_tab:
         st.write("The main objective of this mid-term project is to conduct a thorough analysis of the Water Quality dataset in order to assess the safety of water sources for consumption. Specifically, our aim is to develop a predictive model that can accurately determine the drinkability of water based on various comprehensive water quality parameters.")   
         col1, col2 = st.columns([1, 1])
