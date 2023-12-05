@@ -44,34 +44,39 @@ with intro_tab:
     # Display the selected number of rows
     st.write(f"Displaying top {num_rows} rows:")
     st.write(data.head(num_rows))
-    with goal_tab:
-        col1, col2 = st.columns([1, 1])
-        with col1:
-            st.subheader('| SUMMARY')
-            col = len(data.columns)-1
-            st.write('PARAMETERS : ',col)
-            row = len(data) 
-            st.write('TOTAL DATA : ', row)
-            st.write("Potability Distribution (Pie Chart)")
-            potability_counts = data['Loan_Status'].value_counts()
-            fig1, ax1 = plt.subplots()
-            ax1.pie(potability_counts, labels=potability_counts.index, autopct='%1.1f%%', startangle=90)
-            ax1.axis('equal')
-            st.pyplot(fig1)
-        with col2:
-            st.write("The project goal for the Loan Prediction Problem Dataset is to develop a robust machine learning model that accurately predicts whether a loan application should be approved or denied based on relevant features. The objective is to enhance the efficiency of the lending process by automating decision-making while minimizing the risk of default. Through analysis and prediction, the project aims to contribute to the optimization of loan approval procedures and facilitate more informed lending decisions.")
-    with describe_tab:
-        def to_numeric(df):
-            to_numeric = {'Male': 1, 'Female': 2,
-            'Yes': 1, 'No': 2,
-            'Graduate': 1, 'Not Graduate': 2,
-            'Urban': 3, 'Semiurban': 2, 'Rural': 1,
-            'Y': 1, 'N': 0,
-            '3+': 3}
-            # No need for inplace=True here
-            data = df.applymap(lambda label: to_numeric.get(label) if label in to_numeric else label)
-            return data
-    
-        data = to_numeric(df)
-        st.write(data.describe())
+with goal_tab:
+    col1, col2 = st.columns([1, 1])
+    with col1:
+        st.subheader('| SUMMARY')
+        col = len(data.columns)-1
+        st.write('PARAMETERS : ',col)
+        row = len(data) 
+        st.write('TOTAL DATA : ', row)
+        st.write("Potability Distribution (Pie Chart)")
+        potability_counts = data['Loan_Status'].value_counts()
+        fig1, ax1 = plt.subplots()
+        ax1.pie(potability_counts, labels=potability_counts.index, autopct='%1.1f%%', startangle=90)
+        ax1.axis('equal')
+        st.pyplot(fig1)
+    with col2:
+        st.write("The project goal for the Loan Prediction Problem Dataset is to develop a robust machine learning model that accurately predicts whether a loan application should be approved or denied based on relevant features. The objective is to enhance the efficiency of the lending process by automating decision-making while minimizing the risk of default. Through analysis and prediction, the project aims to contribute to the optimization of loan approval procedures and facilitate more informed lending decisions.")
+with describe_tab:
+    def to_numeric(df):
+        to_numeric = {'Male': 1, 'Female': 2,
+        'Yes': 1, 'No': 2,
+        'Graduate': 1, 'Not Graduate': 2,
+        'Urban': 3, 'Semiurban': 2, 'Rural': 1,
+        'Y': 1, 'N': 0,
+        '3+': 3}
+        # No need for inplace=True here
+        data = df.applymap(lambda label: to_numeric.get(label) if label in to_numeric else label)
+        return data
 
+    data = to_numeric(df)
+    st.write(data.describe())
+    
+with significance_tab:
+    st.write("The project holds significant importance as it evaluates and compares multiple machine learning algorithms, namely Logistic Regression, Random Forest, K-Nearest Neighbors, and Decision Tree, for predicting loan approvals. By assessing the performance of these models, the project aims to identify the most effective approach for loan prediction, providing valuable insights to financial institutions. The findings contribute to the optimization of lending practices, enhancing decision-making processes, and potentially reducing the risk of defaults. This comparative analysis aids in selecting the most suitable algorithm for accurate and reliable loan approval predictions, fostering efficiency and trust in the lending industry.")
+
+with con_tab:
+    st.write("In conclusion, the comprehensive evaluation of Logistic Regression, Random Forest, K-Nearest Neighbors, and Decision Tree models for the Loan Prediction Problem Dataset has provided valuable insights into their respective performances. Through meticulous comparison, it was observed that [mention the best-performing model], demonstrating superior accuracy and reliability in predicting loan approvals. This finding is crucial for financial institutions seeking to enhance their decision-making processes, streamline loan approval procedures, and mitigate risks associated with defaults. The project's outcomes not only contribute to the field of machine learning but also have practical implications, guiding the adoption of the most effective algorithm for optimizing the lending industry's efficiency and efficacy.")
