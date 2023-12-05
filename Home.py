@@ -74,6 +74,7 @@ with describe_tab:
         return data
 
     data = to_numeric(df)
+    data = data.drop('Loan_ID', axis=1)
     st.write(data.describe())
     # Display basic statistics
     st.subheader("Dataset Overview:")
