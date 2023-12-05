@@ -62,17 +62,15 @@ with intro_tab:
             st.write("The project goal for the Loan Prediction Problem Dataset is to develop a robust machine learning model that accurately predicts whether a loan application should be approved or denied based on relevant features. The objective is to enhance the efficiency of the lending process by automating decision-making while minimizing the risk of default. Through analysis and prediction, the project aims to contribute to the optimization of loan approval procedures and facilitate more informed lending decisions.")
     with describe_tab:
         def to_numeric(df):
-        to_numeric = {'Male': 1, 'Female': 2,
-        'Yes': 1, 'No': 2,
-        'Graduate': 1, 'Not Graduate': 2,
-        'Urban': 3, 'Semiurban': 2, 'Rural': 1,
-        'Y': 1, 'N': 0,
-        '3+': 3}
-    
-        # No need for inplace=True here
-        data = df.applymap(lambda label: to_numeric.get(label) if label in to_numeric else label)
-    
-        return data
+            to_numeric = {'Male': 1, 'Female': 2,
+            'Yes': 1, 'No': 2,
+            'Graduate': 1, 'Not Graduate': 2,
+            'Urban': 3, 'Semiurban': 2, 'Rural': 1,
+            'Y': 1, 'N': 0,
+            '3+': 3}
+            # No need for inplace=True here
+            data = df.applymap(lambda label: to_numeric.get(label) if label in to_numeric else label)
+            return data
     
         data = to_numeric(df)
         st.write(data.describe())
