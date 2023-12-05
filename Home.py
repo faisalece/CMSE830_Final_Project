@@ -1,4 +1,4 @@
-import streamlit as st
+cimport streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 
@@ -86,8 +86,9 @@ with describe_tab:
     # Distribution of Loan Amount
     st.subheader("Distribution of Loan Amount:")
     ax_loan_amount = plt.subplots()
-    fig_loan_amount = sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
-    st.pyplot(fig_loan_amount)
+    sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
+    loan_amount_fig = plt.gcf()
+    st.pyplot(loan_amount_fig)
 
     # Boxplot of Applicant Income by Education
     st.subheader("Applicant Income Distribution by Education:")
