@@ -80,41 +80,6 @@ with describe_tab:
     # Display missing values
     st.subheader("Missing Values:")
     st.write(data.isnull().sum())
-
-    df_num = to_numeric(data)
-
-    def fill_data_mode(df):
-        # Fill up data with mode
-        null_cols = ['Credit_History', 'Self_Employed', 'LoanAmount','Dependents', 'Loan_Amount_Term', 'Gender', 'Married']
-        for col in null_cols:
-            df[col] = df[col].fillna(df[col].dropna().mode().values[0])
-        return df
-    
-    #st.write("Fill Data with Mode")
-    df = fill_data_mode(df_num)
-    data = df
-
-    
-    # Distribution of Loan Amount
-    st.subheader("Distribution of data:")
-    column = st.selectbox("Select a column", data.columns)
-    bins = st.slider("Number of bins", 5, 100, 20)
-    st.write("Histogram:")
-    fig, ax = plt.subplots()
-    sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
-    st.pyplot(fig)
-
-    # Boxplot of Applicant Income by Education
-    st.subheader("Applicant Income Distribution by Education:")
-    fig_income_boxplot, ax_income_boxplot = plt.subplots()
-    sns.boxplot(x='Education', y='ApplicantIncome', data=data, palette='pastel')
-    st.pyplot(fig_income_boxplot)
-
-    # Count plot of Loan Approval Status
-    st.subheader("Loan Approval Status Count:")
-    fig_loan_status_count, ax_loan_status_count = plt.subplots()
-    sns.countplot(x='Loan_Status', data=data, palette='Set2')
-    st.pyplot(fig_loan_status_count)
     
 with significance_tab:
     st.write("The project holds significant importance as it evaluates and compares multiple machine learning algorithms, namely Logistic Regression, Random Forest, K-Nearest Neighbors, and Decision Tree, for predicting loan approvals. By assessing the performance of these models, the project aims to identify the most effective approach for loan prediction, providing valuable insights to financial institutions. The findings contribute to the optimization of lending practices, enhancing decision-making processes, and potentially reducing the risk of defaults. This comparative analysis aids in selecting the most suitable algorithm for accurate and reliable loan approval predictions, fostering efficiency and trust in the lending industry.")
