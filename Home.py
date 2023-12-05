@@ -45,7 +45,6 @@ with intro_tab:
     st.write(f"Displaying top {num_rows} rows:")
     st.write(data.head(num_rows))
     with goal_tab:
-        st.write("The main objective of this mid-term project is to conduct a thorough analysis of the Water Quality dataset in order to assess the safety of water sources for consumption. Specifically, our aim is to develop a predictive model that can accurately determine the drinkability of water based on various comprehensive water quality parameters.")   
         col1, col2 = st.columns([1, 1])
         with col1:
             st.subheader('| SUMMARY')
@@ -60,8 +59,7 @@ with intro_tab:
             ax1.axis('equal')
             st.pyplot(fig1)
         with col2:
-            st.write("This research aims to determine if a comprehensive analysis of water quality parameters can accurately predict the drinkability of water sources. Additionally, we seek to understand how the findings from this analysis can contribute to addressing the critical concern of ensuring safe drinking water for everyone. The significance of this project lies in its potential to have a direct impact on public health and well-being. Access to clean and safe drinking water is a basic human right, and by conducting this analysis, we hope to provide valuable insights that can inform water management decisions and help ensure the provision of safe drinking water to communities in need.")
-
+            st.write("The project goal for the Loan Prediction Problem Dataset is to develop a robust machine learning model that accurately predicts whether a loan application should be approved or denied based on relevant features. The objective is to enhance the efficiency of the lending process by automating decision-making while minimizing the risk of default. Through analysis and prediction, the project aims to contribute to the optimization of loan approval procedures and facilitate more informed lending decisions.")
     with describe_tab:
         st.write(data.describe())
 
