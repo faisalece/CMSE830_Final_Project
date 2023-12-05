@@ -85,8 +85,8 @@ with describe_tab:
 
     # Distribution of Loan Amount
     st.subheader("Distribution of Loan Amount:")
-    fig_loan_amount, ax_loan_amount = plt.subplots()
-    sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
+    ax_loan_amount = plt.subplots()
+    fig_loan_amount = sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
     st.pyplot(fig_loan_amount)
 
     # Boxplot of Applicant Income by Education
