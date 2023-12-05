@@ -151,3 +151,22 @@ st.write("### Correlation Heatmap:")
 sns.heatmap(df_new.corr(), annot=True, cmap='coolwarm')
 heatmap_fig = plt.gcf()  # Get the current figure
 st.pyplot(heatmap_fig)
+
+# Distribution of Loan Amount
+st.subheader("Distribution of Loan Amount:")
+fig_loan_amount, ax_loan_amount = plt.subplots()
+sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
+st.pyplot(fig_loan_amount)
+
+# Boxplot of Applicant Income by Education
+st.subheader("Applicant Income Distribution by Education:")
+fig_income_boxplot, ax_income_boxplot = plt.subplots()
+sns.boxplot(x='Education', y='ApplicantIncome', data=data, palette='pastel')
+st.pyplot(fig_income_boxplot)
+
+# Count plot of Loan Approval Status
+st.subheader("Loan Approval Status Count:")
+fig_loan_status_count, ax_loan_status_count = plt.subplots()
+sns.countplot(x='Loan_Status', data=data, palette='Set2')
+st.pyplot(fig_loan_status_count)
+
