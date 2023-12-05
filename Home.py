@@ -84,11 +84,13 @@ with describe_tab:
     st.write(data.isnull().sum())
 
     # Distribution of Loan Amount
-    st.subheader("Distribution of Loan Amount:")
-    ax_loan_amount = plt.subplots()
-    sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
-    loan_amount_fig = plt.gcf()
-    st.pyplot(loan_amount_fig)
+    st.subheader("Distribution of data:")
+    column = st.selectbox("Select a column", data.columns)
+    bins = st.sidebar.slider("Number of bins", 5, 100, 20)
+    st.write("Histogram:")
+    fig, ax = plt.subplots()
+    sns.histplot(data=df, x=column, hue="Loan_Status",bins=bins, kde=True)
+    st.pyplot(fig)
 
     # Boxplot of Applicant Income by Education
     st.subheader("Applicant Income Distribution by Education:")
