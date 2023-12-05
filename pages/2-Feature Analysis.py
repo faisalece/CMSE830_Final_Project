@@ -153,10 +153,19 @@ heatmap_fig = plt.gcf()  # Get the current figure
 st.pyplot(heatmap_fig)
 
 # Distribution of Loan Amount
-st.subheader("Distribution of Loan Amount:")
-fig_loan_amount, ax_loan_amount = plt.subplots()
-sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
-st.pyplot(fig_loan_amount)
+st.subheader("Distribution of data:")
+column = st.selectbox("Select a column", data.columns)
+bins = st.slider("Number of bins", 5, 100, 20)
+st.write("Histogram:")
+fig, ax = plt.subplots()
+sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
+plt.xlabel(column)
+plt.ylabel("Count")
+plt.title(f"Distribution of {column} by Loan Status")
+# Instead of plt.gcf(), use st.pyplot(fig) directly
+st.pyplot(fig)
+
+
 
 # Boxplot of Applicant Income by Education
 st.subheader("Applicant Income Distribution by Education:")
