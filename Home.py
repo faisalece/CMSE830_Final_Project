@@ -45,7 +45,7 @@ with intro_tab:
     with col4:
         st.image("loan_give.jpeg", caption="Here is your loan amount.", use_column_width=True)
 
-    st.markdown('[Source : Kaggle Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)')
+        st.markdown('[Source : Kaggle Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)')
         # Add a slider for selecting the number of rows to display
         num_rows = st.slider("Number of Rows", 1, 600, 100)
 
