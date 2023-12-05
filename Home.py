@@ -89,7 +89,7 @@ with describe_tab:
     column = st.selectbox("Select a column", data.columns)
     bins = st.slider("Number of bins", 5, 100, 20)
     st.write("Histogram:")
-    fig, ax = plt.subplots()
+    plt.figure()
     sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
     plt.xlabel(column)
     plt.ylabel("Count")
