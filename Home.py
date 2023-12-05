@@ -91,12 +91,7 @@ with describe_tab:
     st.write("Histogram:")
     fig, ax = plt.subplots()
     sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
-
-    
-    # Instead of plt.gcf(), use st.pyplot(fig) directly
     st.pyplot(fig)
-
-
 
     # Boxplot of Applicant Income by Education
     st.subheader("Applicant Income Distribution by Education:")
