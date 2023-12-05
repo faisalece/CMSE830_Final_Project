@@ -83,13 +83,6 @@ with describe_tab:
     st.subheader("Missing Values:")
     st.write(data.isnull().sum())
 
-    # Pairwise correlation heatmap
-    st.subheader("Correlation Heatmap:")
-    corr_matrix = data.corr()
-    fig, ax = plt.subplots(figsize=(10, 8))
-    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5, ax=ax)
-    st.pyplot(fig)
-
     # Distribution of Loan Amount
     st.subheader("Distribution of Loan Amount:")
     fig_loan_amount, ax_loan_amount = plt.subplots()
