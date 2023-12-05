@@ -89,7 +89,7 @@ with describe_tab:
     bins = st.sidebar.slider("Number of bins", 5, 100, 20)
     st.write("Histogram:")
     fig, ax = plt.subplots()
-    sns.histplot(data=df, x=column, hue="Loan_Status",bins=bins, kde=True)
+    sns.histplot(data=data, x=column, hue="Loan_Status",bins=bins, kde=True)
     st.pyplot(fig)
 
     # Boxplot of Applicant Income by Education
