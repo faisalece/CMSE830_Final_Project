@@ -76,9 +76,6 @@ with describe_tab:
     data = to_numeric(data)
     data = data.drop('Loan_ID', axis=1)
     st.write(data.describe())
-    # Display basic statistics
-    st.subheader("Dataset Overview:")
-    st.write(data.info().sum())
 
     # Display missing values
     st.subheader("Missing Values:")
