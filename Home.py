@@ -60,6 +60,7 @@ with goal_tab:
         st.pyplot(fig1)
     with col2:
         st.write("The project goal for the Loan Prediction Problem Dataset is to develop a robust machine learning model that accurately predicts whether a loan application should be approved or denied based on relevant features. The objective is to enhance the efficiency of the lending process by automating decision-making while minimizing the risk of default. Through analysis and prediction, the project aims to contribute to the optimization of loan approval procedures and facilitate more informed lending decisions.")
+
 with describe_tab:
     def to_numeric(df):
         to_numeric = {'Male': 1, 'Female': 2,
@@ -74,6 +75,38 @@ with describe_tab:
 
     data = to_numeric(df)
     st.write(data.describe())
+    # Display basic statistics
+    st.subheader("Dataset Overview:")
+    st.write(data.info())
+
+    # Display missing values
+    st.subheader("Missing Values:")
+    st.write(data.isnull().sum())
+
+    # Pairwise correlation heatmap
+    st.subheader("Correlation Heatmap:")
+    corr_matrix = data.corr()
+    fig, ax = plt.subplots(figsize=(10, 8))
+    sns.heatmap(corr_matrix, annot=True, cmap='coolwarm', fmt=".2f", linewidths=.5, ax=ax)
+    st.pyplot(fig)
+
+    # Distribution of Loan Amount
+    st.subheader("Distribution of Loan Amount:")
+    fig_loan_amount, ax_loan_amount = plt.subplots()
+    sns.histplot(data['LoanAmount'], kde=True, bins=20, color='skyblue')
+    st.pyplot(fig_loan_amount)
+
+    # Boxplot of Applicant Income by Education
+    st.subheader("Applicant Income Distribution by Education:")
+    fig_income_boxplot, ax_income_boxplot = plt.subplots()
+    sns.boxplot(x='Education', y='ApplicantIncome', data=data, palette='pastel')
+    st.pyplot(fig_income_boxplot)
+
+    # Count plot of Loan Approval Status
+    st.subheader("Loan Approval Status Count:")
+    fig_loan_status_count, ax_loan_status_count = plt.subplots()
+    sns.countplot(x='Loan_Status', data=data, palette='Set2')
+    st.pyplot(fig_loan_status_count)
     
 with significance_tab:
     st.write("The project holds significant importance as it evaluates and compares multiple machine learning algorithms, namely Logistic Regression, Random Forest, K-Nearest Neighbors, and Decision Tree, for predicting loan approvals. By assessing the performance of these models, the project aims to identify the most effective approach for loan prediction, providing valuable insights to financial institutions. The findings contribute to the optimization of lending practices, enhancing decision-making processes, and potentially reducing the risk of defaults. This comparative analysis aids in selecting the most suitable algorithm for accurate and reliable loan approval predictions, fostering efficiency and trust in the lending industry.")
