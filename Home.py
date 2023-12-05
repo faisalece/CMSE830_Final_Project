@@ -89,13 +89,13 @@ with describe_tab:
     column = st.selectbox("Select a column", data.columns)
     bins = st.slider("Number of bins", 5, 100, 20)
     st.write("Histogram:")
-    
     fig, ax = plt.subplots()
     sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
     plt.xlabel(column)
     plt.ylabel("Count")
     plt.title(f"Distribution of {column} by Loan Status")
-    st.pyplot(fig)
+    histo = plt.gcf()
+    st.pyplot(histo)
 
 
     # Boxplot of Applicant Income by Education
