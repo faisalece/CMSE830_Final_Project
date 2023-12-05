@@ -84,7 +84,7 @@ with describe_tab:
     st.subheader("Missing Values:")
     st.write(data.isnull().sum())
 
-    df_num = to_numeric(df)
+    df_num = to_numeric(data)
 
     def fill_data_mode(df):
         # Fill up data with mode
