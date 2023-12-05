@@ -78,7 +78,7 @@ with describe_tab:
     st.write(data.describe())
     # Display basic statistics
     st.subheader("Dataset Overview:")
-    st.write(data.info())
+    st.write(data.head())
 
     # Display missing values
     st.subheader("Missing Values:")
