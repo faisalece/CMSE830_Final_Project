@@ -8,6 +8,7 @@ def load_data():
     return data
 
 data = load_data()
+df = data
 
 # Set page title and icon
 st.set_page_config(
@@ -43,4 +44,32 @@ with intro_tab:
         st.write("Etc.")
     with col4:
         st.image("loan_give.jpeg", caption="Here is your loan amount.", use_column_width=True)
+
+    st.markdown('[Source : Kaggle Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)')
+        # Add a slider for selecting the number of rows to display
+        num_rows = st.slider("Number of Rows", 1, 600, 100)
+
+        # Display the selected number of rows
+        st.write(f"Displaying top {num_rows} rows:")
+        st.write(data.head(num_rows))
+    with goal_tab:
+        st.write("The main objective of this mid-term project is to conduct a thorough analysis of the Water Quality dataset in order to assess the safety of water sources for consumption. Specifically, our aim is to develop a predictive model that can accurately determine the drinkability of water based on various comprehensive water quality parameters.")   
+        col1, col2 = st.columns([1, 1])
+        with col1:
+            st.subheader('| SUMMARY')
+            col = len(data.columns)-1
+            st.write('PARAMETERS : ',col)
+            row = len(data) 
+            st.write('TOTAL DATA : ', row)
+            st.write("Potability Distribution (Pie Chart)")
+            potability_counts = data['Loan_Status'].value_counts()
+            fig1, ax1 = plt.subplots()
+            ax1.pie(potability_counts, labels=potability_counts.index, autopct='%1.1f%%', startangle=90)
+            ax1.axis('equal')
+            st.pyplot(fig1)
+        with col2:
+            st.write("This research aims to determine if a comprehensive analysis of water quality parameters can accurately predict the drinkability of water sources. Additionally, we seek to understand how the findings from this analysis can contribute to addressing the critical concern of ensuring safe drinking water for everyone. The significance of this project lies in its potential to have a direct impact on public health and well-being. Access to clean and safe drinking water is a basic human right, and by conducting this analysis, we hope to provide valuable insights that can inform water management decisions and help ensure the provision of safe drinking water to communities in need.")
+
+    with describe_tab:
+        st.write(data.describe())
 
