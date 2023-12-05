@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.preprocessing import StandardScaler
-from sklearn.naive_bayes import GaussianNB  # Import Gaussian Naive Bayes Classifier
+from sklearn.naive_bayes import GaussianNB
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
 
 # Load the dataset
@@ -40,7 +40,7 @@ def fill_data_mode(df):
     return df
 
 # Streamlit app display
-st.title("Loan Status Prediction Using Naive Bayes Classifier")  # Updated title
+st.title("Loan Status Prediction Using Naive Bayes Classifier")
 
 st.write("Fill Data with Mode")
 df_num_mode = fill_data_mode(df_num)
