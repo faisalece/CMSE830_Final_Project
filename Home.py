@@ -84,14 +84,6 @@ with describe_tab:
     st.subheader("Missing Values:")
     st.write(data.isnull().sum())
 
-    # Distribution of Loan Amount
-    st.subheader("Distribution of data:")
-    column = st.selectbox("Select a column", data.columns)
-    bins = st.slider("Number of bins", 5, 100, 20)
-    st.write("Histogram:")
-    fig, ax = plt.subplots()
-    sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
-    st.pyplot(fig)
 
     # Boxplot of Applicant Income by Education
     st.subheader("Applicant Income Distribution by Education:")
