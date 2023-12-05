@@ -1,43 +1,21 @@
 import streamlit as st
-import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
 
-# Load the dataset
-def load_data():
-    data = pd.read_csv('train.csv')
-    return data
+def display_reference_page():
+    st.title("Loan Prediction Project Reference")
 
-data = load_data()
+    st.markdown("## Loan Status and Reference:")
+    st.write("When individuals apply for a loan from a bank, several key parameters are considered to assess their creditworthiness and determine the eligibility for the loan. Banks evaluate the applicant's financial stability, credit history, income, and debt levels. Additionally, factors such as employment history, loan purpose, and the applicant's relationship with the bank may also play a crucial role in the decision-making process. The overall goal is to gauge the borrower's ability to repay the loan in a timely manner. These parameters collectively help banks assess the risk associated with lending to a particular individual, ensuring responsible lending practices.")
 
-# Set page title and icon
-st.set_page_config(
-    page_title="Loan Status Analysis",
-    page_icon="💰",
-    layout="wide"
-)
+    st.image("loan_give.jpeg", caption="Here is your loan amount.", use_column_width=True)
 
-# Display source link
-st.markdown('[Source: Kaggle Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)')
+    st.markdown('[Source : Kaggle Dataset](https://www.kaggle.com/datasets/altruistdelhite04/loan-prediction-problem-dataset)')
 
-# Add a slider for selecting the number of rows to display
-num_rows = st.slider("Number of Rows to Display", 1, len(data), 100)
+    st.markdown("## Dataset:")
+    st.write("The Loan Prediction Problem Dataset is sourced from Kaggle and serves as the foundation for this machine learning project. It contains crucial information about loan applicants, including various features such as gender, education, income, and property area. The target variable, 'Loan_Status,' represents whether a loan was approved or denied. The dataset is instrumental in training and evaluating machine learning models to predict loan approvals.")
 
-# Display the selected number of rows
-st.write(f"Displaying top {num_rows} rows:")
-st.write(data.head(num_rows))
+    st.image("loan.jpg", caption="May I get a loan?", use_column_width=True)
 
-# Add any other visualizations or analysis as needed
-# ...
+    st.write("Explore the dataset and its features to gain insights into the factors influencing loan approval decisions.")
 
-# Example: Distribution of Loan Amount
-st.subheader("Distribution of Loan Amount:")
-column = st.selectbox("Select a column", data.columns, index=data.columns.get_loc('LoanAmount'))
-bins = st.slider("Number of bins", 5, 100, 50)
-st.write("Histogram:")
-fig, ax = plt.subplots()
-sns.histplot(data=data, x=column, hue="Loan_Status", bins=bins, kde=True)
-plt.xlabel(column)
-plt.ylabel("Count")
-plt.title(f"Distribution of {column} by Loan Status")
-st.pyplot(fig)
+if __name__ == "__main__":
+    display_reference_page()
