@@ -73,12 +73,12 @@ with describe_tab:
         data = df.applymap(lambda label: to_numeric.get(label) if label in to_numeric else label)
         return data
 
-    data = to_numeric(df)
+    data = to_numeric(data)
     data = data.drop('Loan_ID', axis=1)
     st.write(data.describe())
     # Display basic statistics
     st.subheader("Dataset Overview:")
-    st.write(data.info())
+    st.write(data.info().sum())
 
     # Display missing values
     st.subheader("Missing Values:")
