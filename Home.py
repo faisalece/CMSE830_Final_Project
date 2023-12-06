@@ -52,7 +52,7 @@ with goal_tab:
         st.write('PARAMETERS : ',col)
         row = len(data) 
         st.write('TOTAL DATA : ', row)
-        st.write("Potability Distribution (Pie Chart)")
+        st.write("Loan Status (Pie Chart)")
         potability_counts = data['Loan_Status'].value_counts()
         fig1, ax1 = plt.subplots()
         ax1.pie(potability_counts, labels=potability_counts.index, autopct='%1.1f%%', startangle=90)
