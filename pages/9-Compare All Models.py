@@ -93,12 +93,12 @@ for model_name, model in models.items():
 fig, ax = plt.subplots(2, 1, figsize=(8, 10))
 
 # Plot Maximum Accuracy
-ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red'])
+ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
 ax[0].set_ylabel('Accuracy')
 ax[0].set_title('Maximum Accuracy Comparison')
 
 # Plot Cross-Validation Scores
-ax[1].bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red'])
+ax[1].bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
 ax[1].set_ylabel('Cross-Validation Score')
 ax[1].set_title('Cross-Validation Score Comparison')
 
