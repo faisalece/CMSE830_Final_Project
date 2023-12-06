@@ -8,6 +8,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC  # Import Support Vector Classifier
+from sklearn.naive_bayes import GaussianNB  # Import Naive Bayes Classifier
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
 
 # Load the dataset
@@ -67,7 +69,9 @@ models = {
     'Logistic Regression': LogisticRegression(random_state=start_state),
     'Random Forest': RandomForestClassifier(n_estimators=100, random_state=start_state),
     'k-Nearest Neighbor': KNeighborsClassifier(n_neighbors=9),
-    'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state)
+    'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state),
+    'Support Vector Classifier': SVC(kernel='linear', random_state=start_state),  # You can choose different kernels
+    'Naive Bayes': GaussianNB()
 }
 
 # Dictionary to store maximum accuracy and cross-validation score for each model
