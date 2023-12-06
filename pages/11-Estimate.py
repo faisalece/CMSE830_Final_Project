@@ -44,6 +44,7 @@ df = data.drop('Loan_ID', axis=1)
 df_num = to_numeric(df)
 df_num_mode = fill_data_mode(df_num)
 
+st.write("Hi")
 # Define models with best hyperparameters
 models = {
     'Logistic Regression': LogisticRegression(random_state=start_state),
