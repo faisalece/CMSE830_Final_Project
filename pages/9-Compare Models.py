@@ -8,6 +8,8 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.tree import DecisionTreeClassifier
+from sklearn.svm import SVC  # Import Support Vector Classifier
+from sklearn.naive_bayes import GaussianNB  # Import Naive Bayes Classifier
 from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay, classification_report, accuracy_score
 
 # Load the dataset
@@ -67,7 +69,9 @@ models = {
     'Logistic Regression': LogisticRegression(random_state=start_state),
     'Random Forest': RandomForestClassifier(n_estimators=100, random_state=start_state),
     'k-Nearest Neighbor': KNeighborsClassifier(n_neighbors=9),
-    'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state)
+    'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state),
+    'Support Vector Classifier': SVC(kernel='linear', random_state=start_state),  # You can choose different kernels
+    'Naive Bayes': GaussianNB()
 }
 
 # Dictionary to store maximum accuracy and cross-validation score for each model
@@ -89,12 +93,12 @@ for model_name, model in models.items():
 fig, ax = plt.subplots(2, 1, figsize=(8, 10))
 
 # Plot Maximum Accuracy
-ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red'])
+ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
 ax[0].set_ylabel('Accuracy')
 ax[0].set_title('Maximum Accuracy Comparison')
 
 # Plot Cross-Validation Scores
-ax[1].bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red'])
+ax[1].bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
 ax[1].set_ylabel('Cross-Validation Score')
 ax[1].set_title('Cross-Validation Score Comparison')
 
@@ -102,7 +106,7 @@ st.pyplot(fig)
 
 # Display detailed results for each model
 st.subheader("Decision Summary:")
-st.write("Upon careful analysis of the model comparison results for loan status prediction, it is observed that `LogisticRegression` and `DecisionTreeClassifier` demonstrate superior performance on the provided dataset. This conclusion is drawn from the following key observations:")
+st.write("Upon careful analysis of the model comparison results for loan status prediction, it is observed that `LogisticRegression`, `DecisionTreeClassifier`, and `Support Vector Classifier` demonstrate superior performance on the provided dataset. This conclusion is drawn from the following key observations:")
 
 st.write("1. **Accuracy Comparison:**")
 st.write("   - Both `LogisticRegression` and `DecisionTreeClassifier` exhibit high accuracy in predicting loan status on the test set.")
