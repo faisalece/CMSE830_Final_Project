@@ -45,14 +45,7 @@ df_num = to_numeric(df)
 df_num_mode = fill_data_mode(df_num)
 
 # Define models with best hyperparameters
-models={
-    'Logistic Regression': LogisticRegression(random_state=start_state),
-    'Random Forest': RandomForestClassifier(n_estimators=100, random_state=start_state),
-    'k-Nearest Neighbor': KNeighborsClassifier(n_neighbors=9),
-    'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state),
-    'Support Vector Classifier': SVC(random_state=start_state),  # You can choose different kernels
-    'Naive Bayes': GaussianNB()
-}
+models={'Logistic Regression': LogisticRegression(random_state=start_state),'Random Forest': RandomForestClassifier(n_estimators=100, random_state=start_state),'k-Nearest Neighbor': KNeighborsClassifier(n_neighbors=9),'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state),'Support Vector Classifier': SVC(random_state=start_state),'Naive Bayes': GaussianNB()}
 
 # Select model from dropdown
 selected_model = st.selectbox("Select Model", list(models.keys()) if models else [])
