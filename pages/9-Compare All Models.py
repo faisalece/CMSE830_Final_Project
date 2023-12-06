@@ -70,7 +70,7 @@ models = {
     'Random Forest': RandomForestClassifier(n_estimators=100, random_state=start_state),
     'k-Nearest Neighbor': KNeighborsClassifier(n_neighbors=9),
     'Decision Tree': DecisionTreeClassifier(max_depth=1, random_state=start_state),
-    'Support Vector Classifier': SVC(kernel='linear', random_state=start_state),  # You can choose different kernels
+    'Support Vector Classifier': SVC(random_state=start_state),  # You can choose different kernels
     'Naive Bayes': GaussianNB()
 }
 
