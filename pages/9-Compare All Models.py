@@ -110,10 +110,6 @@ ax_cv_scores.tick_params(axis='x', rotation=45)  # Rotate x-axis labels by 45 de
 st.pyplot(fig_max_accuracy)
 st.pyplot(fig_cv_scores)
 
-
-
-st.pyplot(fig)
-
 # Display detailed results for each model
 st.subheader("Decision Summary:")
 st.write("Upon careful analysis of the model comparison results for loan status prediction, it is observed that `LogisticRegression` and `DecisionTreeClassifier` demonstrate superior performance on the provided dataset. This conclusion is drawn from the following key observations:")
