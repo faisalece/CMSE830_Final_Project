@@ -89,9 +89,6 @@ for model_name, model in models.items():
     mean_cv_score = np.mean(cv_scores)
     mean_cv_scores[model_name] = mean_cv_score
 
-# Bar plot for maximum accuracies
-fig, ax = plt.subplots(2, 1, figsize=(8, 10), hspace=0.5)
-
 # Bar plot for Maximum Accuracy with increased gap
 fig_max_accuracy, ax_max_accuracy = plt.subplots(figsize=(8, 5))
 ax_max_accuracy.bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
