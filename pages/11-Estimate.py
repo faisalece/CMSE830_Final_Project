@@ -42,7 +42,8 @@ df_num = to_numeric(df)
 df_num_mode = fill_data_mode(df_num)
 
 # Select model from dropdown
-selected_model = st.selectbox("Select Model", list(models.keys()))
+selected_model = st.selectbox("Select Model", list(models.keys()) if models else [])
+
 
 # Set parameters from the dataset
 default_parameters = {
