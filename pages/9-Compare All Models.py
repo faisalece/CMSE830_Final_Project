@@ -90,7 +90,7 @@ for model_name, model in models.items():
     mean_cv_scores[model_name] = mean_cv_score
 
 # Bar plot for maximum accuracies
-fig, ax = plt.subplots(2, 1, figsize=(8, 10))
+fig, ax = plt.subplots(2, 1, figsize=(8, 10), hspace=0.5)
 
 # Plot Maximum Accuracy
 ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
