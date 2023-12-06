@@ -92,17 +92,27 @@ for model_name, model in models.items():
 # Bar plot for maximum accuracies
 fig, ax = plt.subplots(2, 1, figsize=(8, 10), hspace=0.5)
 
-# Plot Maximum Accuracy
-ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
-ax[0].set_ylabel('Accuracy')
-ax[0].set_title('Maximum Accuracy Comparison')
-ax[0].tick_params(axis='x', rotation=45)  # Rotate x-axis labels by 45 degrees
+# Bar plot for Maximum Accuracy with increased gap
+fig_max_accuracy, ax_max_accuracy = plt.subplots(figsize=(8, 5))
+ax_max_accuracy.bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
+ax_max_accuracy.set_ylabel('Accuracy')
+ax_max_accuracy.set_title('Maximum Accuracy Comparison')
+ax_max_accuracy.tick_params(axis='x', rotation=45)  # Rotate x-axis labels by 45 degrees
 
-# Plot Cross-Validation Scores
-ax[1].bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
-ax[1].set_ylabel('Cross-Validation Score')
-ax[1].set_title('Cross-Validation Score Comparison')
-ax[1].tick_params(axis='x', rotation=45)  # Rotate x-axis labels by 45 degrees
+# Create a space between the plots
+st.write("")  # Add an empty line to create a gap
+
+# Bar plot for Cross-Validation Scores
+fig_cv_scores, ax_cv_scores = plt.subplots(figsize=(8, 5))
+ax_cv_scores.bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
+ax_cv_scores.set_ylabel('Cross-Validation Score')
+ax_cv_scores.set_title('Cross-Validation Score Comparison')
+ax_cv_scores.tick_params(axis='x', rotation=45)  # Rotate x-axis labels by 45 degrees
+
+# Display the plots separately
+st.pyplot(fig_max_accuracy)
+st.pyplot(fig_cv_scores)
+
 
 
 st.pyplot(fig)
