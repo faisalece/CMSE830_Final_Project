@@ -96,11 +96,14 @@ fig, ax = plt.subplots(2, 1, figsize=(8, 10))
 ax[0].bar(max_accuracies.keys(), max_accuracies.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
 ax[0].set_ylabel('Accuracy')
 ax[0].set_title('Maximum Accuracy Comparison')
+ax[0].tick_params(axis='x', rotation=45)  # Rotate x-axis labels by 45 degrees
 
 # Plot Cross-Validation Scores
 ax[1].bar(mean_cv_scores.keys(), mean_cv_scores.values(), color=['blue', 'green', 'orange', 'red', 'purple', 'brown'])
 ax[1].set_ylabel('Cross-Validation Score')
 ax[1].set_title('Cross-Validation Score Comparison')
+ax[1].tick_params(axis='x', rotation=45)  # Rotate x-axis labels by 45 degrees
+
 
 st.pyplot(fig)
 
