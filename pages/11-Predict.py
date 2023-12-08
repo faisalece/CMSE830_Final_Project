@@ -4,6 +4,7 @@ import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
 from sklearn.metrics import confusion_matrix, classification_report
 
 # Load the dataset
@@ -59,8 +60,13 @@ X_test_scaled = scaler.transform(X_test)
 # Create a logistic regression model
 logreg_model = LogisticRegression(random_state=start_state)
 
+depth_value = 100
+dt_classifier = DecisionTreeClassifier(max_depth=depth_value, random_state=start_state)
+dt_model = dt_classifier.fit(X_train_scaled, y_train)
+
 # Train the model
-logreg_model.fit(X_train_scaled, y_train)
+#logreg_model.fit(X_train_scaled, y_train)
+dt_model.fit(X_train_scaled, y_train)
 
 # User input for prediction
 st.sidebar.header("User Input:")
@@ -99,7 +105,7 @@ user_input = pd.DataFrame({
 
 # Make prediction
 user_input_scaled = StandardScaler().fit_transform(user_input)
-prediction = logreg_model.predict(user_input_scaled)
+prediction = dt_model.predict(user_input_scaled)
 
 # Display prediction result
 st.header("Prediction Result:")
