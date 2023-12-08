@@ -113,11 +113,3 @@ if prediction[0] == 1:
     st.success("Loan Approved!")
 else:
     st.error("Loan Not Approved.")
-
-# Display 10 test values along with real and predicted values
-st.header("Real and Predicted Values for 10 Test Samples:")
-test_samples = pd.DataFrame({
-    'Real Values': y_test.head(20).values,
-    'Predicted Values': dt_model.predict(X_test_scaled[:20])
-})
-st.table(test_samples)
