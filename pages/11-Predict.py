@@ -118,6 +118,6 @@ else:
 st.header("Real and Predicted Values for 10 Test Samples:")
 test_samples = pd.DataFrame({
     'Real Values': y_test.head(20).values,
-    'Predicted Values': logreg_model.predict(X_test_scaled[:20])
+    'Predicted Values': dt_model.predict(X_test_scaled[:20])
 })
 st.table(test_samples)
