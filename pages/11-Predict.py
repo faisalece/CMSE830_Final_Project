@@ -25,8 +25,8 @@ self_employed = st.sidebar.selectbox("Self Employed", ["Yes", "No"])
 applicant_income = st.sidebar.slider("Applicant Income", 0, 80000, 60000)
 coapplicant_income = st.sidebar.slider("Coapplicant Income", 0, 50000, 40000)
 loan_amount = st.sidebar.slider("Loan Amount", 0, 800, 200)
-loan_amount_term = st.sidebar.number_input("Loan Amount Term", min_value=0)
-credit_history = st.sidebar.selectbox("Credit History", ["0", "1"])
+loan_amount_term = st.sidebar.slider("Loan Amount Term", 0, 500, 200)
+credit_history = st.sidebar.selectbox("Credit History", ["1", "0"])
 property_area = st.sidebar.selectbox("Property Area", ["Urban", "Semiurban", "Rural"])
 
 # Convert user input to numeric values
