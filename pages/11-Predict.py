@@ -48,7 +48,7 @@ X = df_num_mode.drop('Loan_Status', axis=1)
 
 # Split the data into training and testing sets
 start_state = 42
-test_fraction = 0.1
+test_fraction = 0.5
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=test_fraction, random_state=start_state)
 
 # Standardize the features using StandardScaler
