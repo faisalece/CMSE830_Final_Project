@@ -68,6 +68,12 @@ credit_history = st.sidebar.selectbox("Credit History", ["0", "1"])
 property_area = st.sidebar.selectbox("Property Area", ["Urban", "Semiurban", "Rural"])
 
 # Convert user input to numeric values
+to_numeric = {'Male': 1, 'Female': 2,
+              'Yes': 1, 'No': 2,
+              'Graduate': 1, 'Not Graduate': 2,
+              'Urban': 3, 'Semiurban': 2, 'Rural': 1,
+              '1': 1, '2': 2, '3+': 3,
+              '0': 0, '1': 1}
 user_input = pd.DataFrame({
     'Gender': [to_numeric[gender]],
     'Married': [to_numeric[married]],
