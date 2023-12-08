@@ -102,7 +102,7 @@ user_input = pd.DataFrame({
 # Make prediction
 user_input_scaled = StandardScaler().fit_transform(user_input)
 prediction = logreg_model.predict(user_input_scaled)
-
+st.write(prediction)
 # Display prediction result
 st.header("Prediction Result:")
 if prediction[0] == 1:
